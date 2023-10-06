@@ -1,4 +1,3 @@
-import { Label, Select } from 'flowbite-react';
 
 export default function RegisterSelectInputRepartidor({onSelectChange}:{onSelectChange: any}) {
 
@@ -7,21 +6,17 @@ export default function RegisterSelectInputRepartidor({onSelectChange}:{onSelect
   }  
 
   return (
-    <div
-      className="max-w-md"
-      id="select"
-    >
+    <div className="w-full">
       <div className="mb-2 block">
-        <Label
-          htmlFor="vehiculo"
-          value="Seleccione su vehiculo"
-        />
+        <label htmlFor="">Seleccione su vehiculo</label>
       </div>
-      <Select
+      <select
+      className="select select-primary w-full"
         id="vehiculo"
         required
         onChange={handleChange}
       >
+        <option disabled selected>Seleccione su vehiculo</option>
         <option>
           Moto
         </option>
@@ -31,7 +26,7 @@ export default function RegisterSelectInputRepartidor({onSelectChange}:{onSelect
         <option>
           Auto
         </option>
-      </Select>
+      </select>
     </div>
   )
 }
