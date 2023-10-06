@@ -9,10 +9,10 @@ export const NavBar = () => {
   };
 
   return (
-    <nav className="bg-violet-700 p-2 flex flex-col md:flex-row items-center justify-between">
+    <nav className="bg-primary p-2 flex flex-col md:flex-row items-center justify-between">
       <div className="flex justify-between items-center w-full md:w-auto pl-3 pr-3">
         <div className="flex items-center">
-          <img className="w-14 h-14" src="home/logotipo.png" alt="" />
+          <img className="w-14 h-14" src="home/logo2.png" alt="" />
           <h2 className="text-2xl ml-2 font-semibold text-white">
             Pedidos Crombie
           </h2>
