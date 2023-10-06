@@ -2,49 +2,46 @@
 import React from "react";
 import { useState } from "react";
 export const NavBar = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   return (
-    <nav className="bg-primary p-2 flex flex-col md:flex-row items-center justify-between">
-      <div className="flex justify-between items-center w-full md:w-auto pl-3 pr-3">
-        <div className="flex items-center">
-          <img className="w-14 h-14" src="home/logo2.png" alt="" />
-          <h2 className="text-2xl ml-2 font-semibold text-white">
+    <div className="drawer">
+      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col">
+        {/* Navbar */}
+        <div className="w-full navbar bg-primary">
+          <div className="flex-none lg:hidden">
+            <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </label>
+          </div>
+          <div className="flex-1 px-2 mx-2 text-xl text-white font-bold">
+          <img className="w-12 mr-2" src="/Home/logo2.png" alt="" />
             Pedidos Crombie
-          </h2>
-        </div>
-
-        <div className="flex items-center">
-          <span onClick={toggleMenu} className="md:hidden dark:bg-slate-300 dark:rounded-full dark:p-2">
-            <img
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAExJREFUSEtjZKAxYKSx+QyjFhAM4QEJov8EnYVfAYqjsfmA5hZQ6AFU7QMSBzT3Ac3jgOYW0DyIhr4FNI8Dmlsw9ONg1AcoIUDz0hQAbegGGXzv/l0AAAAASUVORK5CYII="
-              alt="Menu Icon"
-            />
-          </span>
+          </div>
+          <div className="flex-none hidden lg:block">
+            <ul className="menu menu-horizontal">
+              {/* Navbar menu content here */}
+              <button className="btn btn-neutral mr-4">Register</button>
+              <button className="btn btn-accent">Login</button>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <ul
-        className={`dark:text-white flex ${menuOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row items-center space-x-0 mt-2 md:space-x-4 space-y-2 md:space-y-0 text-[#4F5665] mb-2`}
-      >
-        <li className="text-base cursor-pointer md:last-child:mb-0">About</li>
-        <li className="text-base cursor-pointer md:last-child:mb-0">Register</li>
-        <li className="text-base cursor-pointer md:last-child:mb-0">Help</li>
-      </ul>
-
-      <div className={`flex ${menuOpen ? 'block' : 'hidden'} md:flex flex-col md:flex-row items-center space-x-0 md:space-x-4 space-y-2 md:space-y-0`}>
-        <a href="" className="text-base font-semibold">
-          Sign In
-        </a>
-        <button className="text-base button-color-basic font-semibold border border-white px-4 py-2 rounded-full cursor-pointer pl-5 pr-5 hover-[#F53855] boton-fondo">
-          Sign Up
-        </button>
+      <div className="drawer-side">
+        <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-80 min-h-full bg-black">
+          {/* Sidebar content here */}
+          <button className="btn btn-neutral">Register</button>
+          <button className="btn btn-accent mt-5">Login</button>
+        </ul>
       </div>
-    </nav>
-    );
+    </div>
+
+  );
 }
 export default NavBar;
