@@ -1,47 +1,74 @@
 export default function () {
     return (
-        <div className="container mx-auto max-w-screen-2xl mt-20 pl-5 pr-5">
+        <div className="container mx-auto max-w-screen-lg mt-10 pl-5 pr-5">
+            <h1 className="text-xl text-center pb-2 font-bold">Landing Usuario</h1>
 
-            <div className="grid grid-cols-3 grid-rows-6 gap-4">
-                <div className="col-span-1 row-span-3 bg-blue-500 p-4">Restaurantes</div>
-                <div className="col-span-2 bg-green-500 p-4">Almacen</div>
-                <div className="row-span-2 bg-red-500 p-4">Bebidas</div>
-                <div className="bg-yellow-500 p-4">Helado</div>
-                <div className="row-span-1 bg-purple-500 p-4">Panaderia</div>
-                <div className="col-span-3 bg-purple-500 p-4 text-center">Farmacia</div>
+            <div className="grid grid-cols-3 grid-rows-3 gap-3 mb-0 ">
+
+                <div className="col-span-1 row-span-1 bg-warning mb-0 p-2 rounded-md">
+                    <div className="flex flex-col items-center justify-center">
+                        <img src="/UserLanding/burguer.svg" className="w-1/2" alt="" />
+                        <h3 className="text-base md:text-xl font-bold text-white">Resturante</h3>
+                    </div>
+                </div>
+                <div className="col-span-2 bg-green-500 mb-0 p-2 flex rounded-md">
+                    <div className="flex flex-col items-center justify-center">
+                        <img src="/UserLanding/groceries.svg" className="w-1/5" alt="" />
+                        <h3 className="text-base md:text-xl font-bold text-white">Mercado</h3>
+                    </div>
+                </div>
+                <div className="row-span-2 bg-green-500 mb-0 p-2 rounded-md">
+                    <div className="flex flex-col items-center justify-center h-full">
+                        <img src="/UserLanding/drinks.svg" className="w-1/2" alt="" />
+                        <h3 className="text-base md:text-xl font-bold text-white">Bebidas</h3>
+                    </div>
+                </div>
+                <div className="bg-yellow-500 mb-0 p-2 rounded-md">
+                    <div className="flex flex-col items-center justify-center">
+                        <img src="/UserLanding/iceCream.svg" className="w-1/2" alt="" />
+                        <h3 className="text-base md:text-xl font-bold text-white">Helado</h3>
+                    </div>
+                </div>
+
+                <div className="row-span-1 bg-red-500 mb-0 p-2 rounded-md">
+                    <div className="flex flex-col items-center  justify-center">
+                        <img src="/UserLanding/bakery.svg" className="w-1/2" alt="" />
+                        <h3 className="text-base md:text-xl font-bold text-white">Panaderia</h3>
+                    </div>
+                </div>
+
+                <div className="col-span-2 bg-purple-500 p-2 mb-0 text-center rounded-md">
+                    <div className="flex flex-col items-center justify-center">
+                        <img src="/UserLanding/pharmacy.svg" className="w-1/4" alt="" />
+                        <h3 className="text-base md:text-xl font-bold text-white">Farmacia</h3>
+                    </div>
+                </div>
             </div>
 
-
-            <div className="carousel w-full">
+ 
+            <div className="carousel w-full pt-10 pb-10">
                 <div id="slide1" className="carousel-item relative w-full">
-                    <img src="/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" className="w-full" />
+                    <img src="/UserLanding/promos/1.jpg" className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                         <a href="#slide4" className="btn btn-circle">❮</a>
                         <a href="#slide2" className="btn btn-circle">❯</a>
                     </div>
                 </div>
                 <div id="slide2" className="carousel-item relative w-full">
-                    <img src="/images/stock/photo-1609621838510-5ad474b7d25d.jpg" className="w-full" />
+                    <img src="/UserLanding/promos/2.jpg" className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                         <a href="#slide1" className="btn btn-circle">❮</a>
                         <a href="#slide3" className="btn btn-circle">❯</a>
                     </div>
                 </div>
                 <div id="slide3" className="carousel-item relative w-full">
-                    <img src="/images/stock/photo-1414694762283-acccc27bca85.jpg" className="w-full" />
+                    <img src="/UserLanding/promos/3.jpg" className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                         <a href="#slide2" className="btn btn-circle">❮</a>
                         <a href="#slide4" className="btn btn-circle">❯</a>
                     </div>
                 </div>
-                <div id="slide4" className="carousel-item relative w-full">
-                    <img src="/images/stock/photo-1665553365602-b2fb8e5d1707.jpg" className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide3" className="btn btn-circle">❮</a>
-                        <a href="#slide1" className="btn btn-circle">❯</a>
-                    </div>
-                </div>
-            </div>
+            </div> 
         </div>
     );
 }
