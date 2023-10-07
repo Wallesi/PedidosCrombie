@@ -43,7 +43,7 @@ export default function RegisterSelectInputCiudad({ onSelectChange }: Props) {
         required
         onChange={handleChange}
       >
-        <option disabled selected>Seleccione su provincia</option>
+       
         {provincias ? (
           provincias.map((provincia) => (
             <option value={provincia.nombre} key={provincia.id}>{provincia.nombre}</option>

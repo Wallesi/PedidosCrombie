@@ -9,14 +9,13 @@ export default function RegisterSelectInput({onSelectChange}:{onSelectChange: an
   return (
     <div className="w-full">
       <div className="mb-2 block">
-        <label htmlFor="">Usted es un?"</label>
+        <label htmlFor="">Usted es un?</label>
       </div>
       <select
         className="select select-primary w-full"
         required
         onChange={handleChange}
       >
-        <option disabled selected>usted es un?</option>
         <option>
           Cliente
         </option>
