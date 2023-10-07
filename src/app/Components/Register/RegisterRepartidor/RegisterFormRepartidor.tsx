@@ -2,7 +2,6 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { Button, Label, TextInput } from 'flowbite-react';
 import RegisterSelectInputRepartidor from './RegisterSelectInputRepartidor';
 import { useState } from "react";
 
@@ -60,34 +59,34 @@ export default function RegisterFormRepartidor({ datosGenerales }: { datosGenera
   });
 
   return (
-    <div className='h-full'>
-      <form onSubmit={onSubmit}>
+    <div className='w-full'>
+      <form onSubmit={onSubmit} className="flex flex-col gap-4 w-full items-center">
         <div>
-          <h3 className='text-center text-black text-2xl font-medium leading-9'>Ingrese datos de su vehiculo <br /> para continuar 🛵🍕</h3>
+          <h3 className='text-center text-black text-2xl font-medium leading-9'>Ingrese datos de su vehiculo para continuar 🛵🍕</h3>
         </div>
-        <div>
-
-          <div className="mb-2 block">
-            <Label
-              htmlFor="patente"
-              value="Numero de Patente"
-            />
+        
+        <div className="w-full">
+          <div className="block">
+           <label htmlFor="">Numero de Patente</label>
           </div>
-          <TextInput
+          <input
             id="patente"
-            className="mt-5 h-16 drop-shadow-lg"
+            className="input input-bordered input-primary w-full"
             type="text"
             {...register("patente")}
             name="patente"
             placeholder="patente"
           />
           {errors.patente?.message ? <p className="h-3 text-red-500">{errors.patente?.message}</p> : <p className="h-3"></p>}
-          <RegisterSelectInputRepartidor onSelectChange={funcionVehiculoSeleccionado} />
-          
         </div>
-        <Button className="gap-4" color='purple' type="submit">
+
+        <div className="w-full">
+        <RegisterSelectInputRepartidor onSelectChange={funcionVehiculoSeleccionado} /> 
+        </div>
+
+        <button className="btn btn-primary w-full" color='purple' type="submit">
           Registrate
-        </Button>
+        </button>
       </form>
     </div>
   )

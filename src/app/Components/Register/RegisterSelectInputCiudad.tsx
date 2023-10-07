@@ -1,6 +1,5 @@
 'use client'
 
-import { Label, Select } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 
 interface Provincia {
@@ -34,21 +33,17 @@ export default function RegisterSelectInputCiudad({ onSelectChange }: Props) {
   };
   
   return (
-    <div
-      className="max-w-md"
-      id="select"
-    >
+    <div className="w-full">
       <div className="mb-2 block">
-        <Label
-          htmlFor="provincia"
-          value="Seleccione su provincia"
-        />
+       <label htmlFor="">Seleccione su provincia</label>
       </div>
-      <Select
+      <select
+        className='select select-primary w-full'
         id="provincia"
         required
         onChange={handleChange}
       >
+        <option disabled selected>Seleccione su provincia</option>
         {provincias ? (
           provincias.map((provincia) => (
             <option value={provincia.nombre} key={provincia.id}>{provincia.nombre}</option>
@@ -56,7 +51,7 @@ export default function RegisterSelectInputCiudad({ onSelectChange }: Props) {
         ) : (
           <option>Cargando...</option>
         )}
-      </Select>
+      </select>
     </div>
   )
 

@@ -7,6 +7,9 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    daisyui: {
+      themes: ["light", "dark", "cupcake"],
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -15,6 +18,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")]
 }
+
+
 export default config

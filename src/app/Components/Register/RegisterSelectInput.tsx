@@ -1,5 +1,3 @@
-import { Label, Select } from 'flowbite-react';
-
 export default function RegisterSelectInput({onSelectChange}:{onSelectChange: any}) {
 
   const handleChange = (event: any) => {
@@ -9,21 +7,16 @@ export default function RegisterSelectInput({onSelectChange}:{onSelectChange: an
   };
   
   return (
-    <div
-      className="max-w-md"
-      id="select"
-    >
+    <div className="w-full">
       <div className="mb-2 block">
-        <Label
-          htmlFor="tipo"
-          value="Usted es un?"
-        />
+        <label htmlFor="">Usted es un?"</label>
       </div>
-      <Select
-        id="tipo"
+      <select
+        className="select select-primary w-full"
         required
         onChange={handleChange}
       >
+        <option disabled selected>usted es un?</option>
         <option>
           Cliente
         </option>
@@ -33,7 +26,7 @@ export default function RegisterSelectInput({onSelectChange}:{onSelectChange: an
         <option>
           Repartidor
         </option>
-      </Select>
+      </select>
     </div>
   )
 }
