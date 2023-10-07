@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { Button, Card, Label, TextInput } from 'flowbite-react';
 import RegisterSelectInputLocal from './RegisterSelectInputLocal';
 import { useState } from 'react';
 
@@ -56,35 +55,34 @@ export default function RegisterFormLocal({ datosGenerales }: { datosGenerales: 
     console.log({ ...datosGenerales, ...information });
   });
 
-    return (
-      <form className="flex max-w-5xl flex-col gap-4" onSubmit={onSubmit}>
+  return (
+    <div className="w-full">
+      <form className="flex flex-col items-center gap-4" onSubmit={onSubmit}>
         <div>
-            <h3 className='text-center text-black text-2xl font-medium leading-9'>Ingrese datos de su Negocio <br /> para continuar 🏪🍕</h3>
-          </div>
-        <div>
-          <div className="mb-2 block">
-            <Label
-              htmlFor="Descripcion"
-              value="Ingrese una descripcion para su Negocio"
-            />
-          </div>
-          <TextInput
-            id="desc"
-            placeholder="Negocio de comida rapida"
-            required
-            {...register("descripcion")}
-            name="descripcion"
-            type="text"
-          />
+          <h3 className='text-center text-black text-2xl font-medium leading-9'>Ingrese datos de su Negocio <br /> para continuar 🏪🍕</h3>
         </div>
-        {errors.descripcion?.message ? <p className="h-3 text-red-500">{errors.descripcion?.message}</p> : <p className="h-3"></p>}
+        <div className="w-full">
+          <div className="block">
+            <label>Ingrese una descripcion para su Negocio</label>
+          </div>
+          <input
+            type="text"
+            placeholder="Negocio de comida rapida"
+            className="input input-bordered input-primary w-full"
+            {...register("descripcion")}
+          />
+          {errors.descripcion?.message ? <p className="h-3 text-red-500">{errors.descripcion?.message}</p> : <p className="h-3"></p>}
+        </div>
+
 
         <RegisterSelectInputLocal onSelectChange={funcionTipoNegocioSeleccionado} />
-        <Button type="submit" color='purple'>
+
+        <button className="btn btn-primary w-full" type="submit">
           Registrarse
-        </Button>
+        </button>
       </form>
-    )
+    </div>
+  )
 }
 
 
