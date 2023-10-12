@@ -5,27 +5,21 @@ import * as yup from "yup"
 import SelectInput from './RegisterSelectInput';
 import { useState } from 'react';
 import { RegisterRepartidor } from './RegisterRepartidor/RegisterRepartidor';
-import RegisterSelectInputCiudad from "./RegisterSelectInputCiudad";
 import { RegisterLocal } from "./RegisterLocal/RegisterLocal";
+import { User } from "@/app/types/User"
 
-type FormType = {
-  nombre: string,
-  email: string;
-  phone: string;
-  password: string,
-  ciudad: string,
-  rol: string;
-};
 
 const schema = yup
   .object({
-    nombre: yup.string()
+    name: yup.string()
       .required("por favor ingresa su nombre"),
+    lastName: yup.string()
+      .required("por favor ingresa su apellido"),
     email: yup.string()
       .required("Por favor ingrese su correo electrónico")
       .email()
       .max(100, "Máximo 100 caracteres para su correo electrónico."),
-    phone: yup.string()
+      phoneNumber: yup.string()
       .required("Por favor ingrese su número de teléfono")
       .min(9, "Su número debe tener al menos 9 caracteres")
       .max(15, "Máximo 30 caracteres para su número de teléfono."),
@@ -33,14 +27,12 @@ const schema = yup
       .required("Por favor ingrese su contraseña")
       .min(5, "Este campo debe tener al menos 5 caracteres")
       .max(30, "Este campo debe tener un máximo de 30 caracteres"),
-    ciudad: yup
+    role: yup
       .string()
       .required("Debe seleccionar una opción")
-      .default("Misiones"),
-    rol: yup
-      .string()
-      .required("Debe seleccionar una opción")
-      .default("Cliente")
+      .default("Cliente"),
+    createdAt: yup
+    .date().default(() => new Date()),
   })
   .required("Este campo es obligatorio.");
 
@@ -49,13 +41,13 @@ export default function RegisterForm() {
   const [rol, setRol] = useState({ type: "Cliente" });
   const [ciudad, setCiudad] = useState({ city: "Misiones" })
   const [formValue, setFormValue] = useState(false);
-  const [data, setData] = useState<FormType>();
+  const [data, setData] = useState<User>();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormType>({
+  } = useForm<User>({
     resolver: yupResolver(schema)
   })
 
@@ -69,8 +61,7 @@ export default function RegisterForm() {
   }
 
   const onSubmit = handleSubmit((information) => {
-    information.rol = rol.type
-    information.ciudad = ciudad.city
+    information.role = rol.type
     setFormValue(true)
     setData(information)
     console.log(information);
@@ -83,24 +74,40 @@ export default function RegisterForm() {
         <div>
           <h3 className='text-center text-black text-2xl font-medium leading-9'>Registrate para comenzar 🍕</h3>
         </div>
+
         <div className="w-full">
           <div className="block">
-            <label htmlFor="">Ingrese su nombre / nombre de local</label>
+            <label htmlFor="">Ingrese su nombre</label>
           </div>
           <input
             id="name"
             className="input input-bordered input-primary w-full"
             type="name"
-            {...register("nombre")}
-            name="nombre"
+            {...register("name")}
+            name="name"
             placeholder="nombre"
           />
-          {errors.nombre?.message ? <p className="h-3 text-red-500">{errors.nombre?.message}</p> : <p className="h-3"></p>}
+          {errors.name?.message ? <p className="h-3 text-red-500">{errors.name?.message}</p> : <p className="h-3"></p>}
         </div>
 
         <div className="w-full">
           <div className="block">
-            <label htmlFor="">Ingrese su Email</label>
+            <label htmlFor="">Ingrese su apellido</label>
+          </div>
+          <input
+            id="apellido"
+            className="input input-bordered input-primary w-full"
+            type="apellido"
+            {...register("lastName")}
+            name="lastName"
+            placeholder="apellido"
+          />
+          {errors.lastName?.message ? <p className="h-3 text-red-500">{errors.lastName?.message}</p> : <p className="h-3"></p>}
+        </div>
+
+        <div className="w-full">
+          <div className="block">
+            <label htmlFor="">Ingrese su email</label>
           </div>
           <input
             id="email"
@@ -108,12 +115,10 @@ export default function RegisterForm() {
             type="email"
             {...register("email")}
             name="email"
-            placeholder="Email"
+            placeholder="email"
           />
           {errors.email?.message ? <p className="h-3 text-red-500">{errors.email?.message}</p> : <p className="h-3"></p>}
         </div>
-
-
 
         <div className="w-full">
           <div className="block">
@@ -123,11 +128,11 @@ export default function RegisterForm() {
             id="tel"
             className="input input-bordered input-primary w-full"
             type="tel"
-            {...register("phone")}
-            name="phone"
-            placeholder="Phone"
+            {...register("phoneNumber")}
+            name="phoneNumber"
+            placeholder="telefono"
           />
-          {errors.phone?.message ? <p className="h-3 text-red-500">{errors.phone?.message}</p> : <p className="h-3"></p>}
+          {errors.phoneNumber?.message ? <p className="h-3 text-red-500">{errors.phoneNumber?.message}</p> : <p className="h-3"></p>}
         </div>
 
         <div className="w-full">
@@ -146,9 +151,9 @@ export default function RegisterForm() {
         </div>
 
 
-        <RegisterSelectInputCiudad
+        {/* <RegisterSelectInputCiudad
           onSelectChange={handleSelectChangeCiudad}
-        />
+        /> */}
 
         <SelectInput
           onSelectChange={handleSelectChange}
@@ -158,9 +163,9 @@ export default function RegisterForm() {
 
       </form>
 
-      {data?.rol === "Repartidor" ? <RegisterRepartidor datosGenerales={data} />
+      {data?.role === "Repartidor" ? <RegisterRepartidor datosGenerales={data} />
         :
-        data?.rol === "Negocio" ? <RegisterLocal datosGenerales={data} />
+        data?.role === "Negocio" ? <RegisterLocal datosGenerales={data} />
           :
           null
       }
