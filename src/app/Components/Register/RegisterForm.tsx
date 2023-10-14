@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
-import { Button, Card, Label, TextInput } from 'flowbite-react';
 import SelectInput from './RegisterSelectInput';
 import { useState } from 'react';
 import { RegisterRepartidor } from './RegisterRepartidor/RegisterRepartidor';
@@ -78,81 +77,74 @@ export default function RegisterForm() {
   })
 
   return (
-    <Card className="max-w-5xl w-full">
+    <div className="max-w-xl w-full bg-base-100">
 
-      <form className={formValue === false ? `flex flex-col gap-4` : "hidden"} onSubmit={onSubmit}>
+      <form className={formValue === false ? `flex flex-col gap-4 w-full items-center` : "hidden"} onSubmit={onSubmit}>
         <div>
           <h3 className='text-center text-black text-2xl font-medium leading-9'>Registrate para comenzar 🍕</h3>
         </div>
-
-        <div className="mb-2 block">
-          <Label
-            htmlFor="name"
-            value="Ingrese su nombre / nombre de local"
-          />
-        </div>
-        <TextInput
-          id="name"
-          className="h-16 mt-5 drop-shadow-lg"
-          type="name"
-          {...register("nombre")}
-          name="nombre"
-          placeholder="nombre"
-        />
-        {errors.nombre?.message ? <p className="h-3 text-red-500">{errors.nombre?.message}</p> : <p className="h-3"></p>}
-
-        <div className="mb-2 block">
-          <Label
-            htmlFor="email"
-            value="Ingrese su Email"
-          />
-        </div>
-        <TextInput
-          id="email"
-          className="h-16 mt-5 drop-shadow-lg"
-          type="email"
-          {...register("email")}
-          name="email"
-          placeholder="Email"
-        />
-        {errors.email?.message ? <p className="h-3 text-red-500">{errors.email?.message}</p> : <p className="h-3"></p>}
-
-
-        <div>
-          <div className="mb-2 block">
-            <Label
-              htmlFor="phone"
-              value="Ingrese su numero de telefono"
-            />
+        <div className="w-full">
+          <div className="block">
+            <label htmlFor="">Ingrese su nombre / nombre de local</label>
           </div>
-          <TextInput
+          <input
+            id="name"
+            className="input input-bordered input-primary w-full"
+            type="name"
+            {...register("nombre")}
+            name="nombre"
+            placeholder="nombre"
+          />
+          {errors.nombre?.message ? <p className="h-3 text-red-500">{errors.nombre?.message}</p> : <p className="h-3"></p>}
+        </div>
+
+        <div className="w-full">
+          <div className="block">
+            <label htmlFor="">Ingrese su Email</label>
+          </div>
+          <input
+            id="email"
+            className="input input-bordered input-primary w-full"
+            type="email"
+            {...register("email")}
+            name="email"
+            placeholder="Email"
+          />
+          {errors.email?.message ? <p className="h-3 text-red-500">{errors.email?.message}</p> : <p className="h-3"></p>}
+        </div>
+
+
+
+        <div className="w-full">
+          <div className="block">
+            <label htmlFor="">Ingrese su numero de telefono</label>
+          </div>
+          <input
             id="tel"
-            className="mt-5 pb-0 drop-shadow-lg"
+            className="input input-bordered input-primary w-full"
             type="tel"
             {...register("phone")}
             name="phone"
             placeholder="Phone"
           />
+          {errors.phone?.message ? <p className="h-3 text-red-500">{errors.phone?.message}</p> : <p className="h-3"></p>}
         </div>
-        {errors.phone?.message ? <p className="h-3 text-red-500">{errors.phone?.message}</p> : <p className="h-3"></p>}
 
-        <div>
+        <div className="w-full">
           <div className="mb-2 block">
-            <Label
-              htmlFor="password"
-              value="Ingrese su contraseña"
-            />
+            <label htmlFor="">Ingrese su contraseña</label>
           </div>
-          <TextInput
+          <input
             id="password"
-            className="h-16 mt-5 drop-shadow-lg"
+            className="input input-bordered input-primary w-full"
             type="password"
             {...register("password")}
             name="password"
             placeholder="contraseña"
           />
+          {errors.password?.message ? <p className="h-3 text-red-500">{errors.password?.message}</p> : <p className="h-3"></p>}
         </div>
-        {errors.password?.message ? <p className="h-3 text-red-500">{errors.password?.message}</p> : <p className="h-3"></p>}
+
 
         <RegisterSelectInputCiudad
           onSelectChange={handleSelectChangeCiudad}
@@ -162,17 +154,17 @@ export default function RegisterForm() {
           onSelectChange={handleSelectChange}
         />
 
-        <Button type="submit" color="purple">Continuar</Button>
+        <button type="submit" className="btn btn-primary w-full">Continuar</button>
 
       </form>
 
-      {data?.rol === "Repartidor" ? <RegisterRepartidor datosGenerales={data} /> 
-      :
-      data?.rol === "Negocio" ? <RegisterLocal datosGenerales={data} /> 
-      :
-      null  
+      {data?.rol === "Repartidor" ? <RegisterRepartidor datosGenerales={data} />
+        :
+        data?.rol === "Negocio" ? <RegisterLocal datosGenerales={data} />
+          :
+          null
       }
-    </Card>
+    </div>
   )
 }
 

@@ -1,22 +1,15 @@
 'use client';
 
-import { Label, Select } from 'flowbite-react';
-
 export default function LoginSelectInput() {
   return (
-    <div
-      className="max-w-md"
-      id="select"
-    >
+    <div className='w-full'>
       <div className="mb-2 block">
-        <Label
-          htmlFor="tipo"
-          value="Iniciar sesion como"
-        />
+        <label htmlFor="">Iniciar sesion como</label>
       </div>
-      <Select
+      <select
         id="tipo"
         required
+        className="select select-primary w-full"
       >
         <option>
           Cliente
@@ -27,7 +20,7 @@ export default function LoginSelectInput() {
         <option>
           Repartidor
         </option>
-      </Select>
+      </select>
     </div>
   )
 }
