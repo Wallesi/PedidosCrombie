@@ -60,6 +60,7 @@ export default function Home() {
                                 <p>Bla bla</p>
                                 <div className="card-actions">
                                     <button className="btn btn-primary">Registrate</button>
+                                    <a href="/Shop" className="btn btn-primary">Menu</a>
                                 </div>
                             </div>
                         </div>
