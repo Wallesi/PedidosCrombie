@@ -24,14 +24,16 @@ export default function () {
                     </div>
                 </a>
 
-                
-                    <div className="col-span-1 bg-info mb-3 p-2 rounded-md hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+
+                <div className="col-span-1 bg-info mb-3 p-2 rounded-md hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="/perfil">
                         <div className="flex flex-col items-center justify-center p-3">
                             <h4 className="text-white font-semibold text-2xl md:text-lg">Mi perfil</h4>
                             <img className="w-2/5 md:w-8/12 p-4 pt-5" src="/Delivery/profile.svg" alt="" />
                         </div>
-                    </div>
-                
+                    </a>
+                </div>
+
             </div>
         </div>
     )

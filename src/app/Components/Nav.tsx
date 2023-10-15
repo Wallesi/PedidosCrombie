@@ -28,6 +28,7 @@ export const NavBar = () => {
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
+              <a href="/perfil" className="btn btn-accent mr-4">Perfil</a>
               <button className="btn btn-neutral mr-4">Register</button>
               <button className="btn btn-accent">Login</button>
             </ul>
