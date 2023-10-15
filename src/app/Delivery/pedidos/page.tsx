@@ -1,11 +1,12 @@
 export default function () {
     return (
         <div className="container mx-auto max-w-screen-lg pl-20 pr-20 pt-5 pb-5">
+            <h1 className="text-center text-2xl font-bold">Pedidos disponibles</h1>
             <input type="text" placeholder="Buscar pedidos" className="input input-bordered w-full mt-5" />
 
             <div className="pt-10 pb-10">
 
-                <div className="flex flex-col items-center p-4 md:flex-row md:items-center md:justify-between border rounded-xl gap-2">
+                <div className="flex flex-col items-center p-4 md:flex-row md:items-center md:justify-between border border-gray-300 rounded-xl gap-2">
                     <div className="text-center md:text-left">
                         <div>
                             <h1 className="text-base font-bold text-center">Emisor</h1>
@@ -50,7 +51,7 @@ export default function () {
                     </div>
                 </div>
 
-                <div className="mt-5 flex flex-col items-center p-4 md:flex-row md:items-center md:justify-between border rounded-xl">
+                <div className="mt-5 flex flex-col items-center p-4 md:flex-row md:items-center md:justify-between border border-gray-300 rounded-xl">
                     <div className="text-center md:text-left">
                         <div>
                             <h1 className="text-base font-bold text-center">Emisor</h1>
