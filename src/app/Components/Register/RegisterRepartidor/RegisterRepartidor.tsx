@@ -1,16 +1,9 @@
 import React from 'react'
 import RegisterFormRepartidor from './RegisterFormRepartidor'
+import { User } from '@/app/types/User'
 
-type FormType = {
-  nombre: string,
-  email: string;
-  phone: string;
-  password: string,
-  ciudad:string,
-  rol: string;
-};
 
-export const RegisterRepartidor = ({datosGenerales} : { datosGenerales: FormType }) => {
+export const RegisterRepartidor = ({datosGenerales} : { datosGenerales: User }) => {
   return (
         <div className='h-full'>
             <RegisterFormRepartidor datosGenerales={datosGenerales}/>

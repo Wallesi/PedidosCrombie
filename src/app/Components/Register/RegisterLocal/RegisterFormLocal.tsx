@@ -5,20 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import RegisterSelectInputLocal from './RegisterSelectInputLocal';
 import { useState } from 'react';
+import { User } from "@/app/types/User";
 
 type NegocioType = {
   descripcion: string,
   tipoNegocio: string
 }
-
-type FormType = {
-  nombre: string,
-  email: string;
-  phone: string;
-  password: string,
-  ciudad: string,
-  rol: string;
-};
 
 const schemaNegocio = yup
   .object({
@@ -34,7 +26,7 @@ const schemaNegocio = yup
   })
   .required();
 
-export default function RegisterFormLocal({ datosGenerales }: { datosGenerales: FormType }) {
+export default function RegisterFormLocal({ datosGenerales }: { datosGenerales: User}) {
 
   const [negocioSeleccionado, setNegocioSeleccionado] = useState("Restaurante")
 

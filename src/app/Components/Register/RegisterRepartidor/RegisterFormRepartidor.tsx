@@ -4,23 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import RegisterSelectInputRepartidor from './RegisterSelectInputRepartidor';
 import { useState } from "react";
+import { User } from "@/app/types/User";
 
 type RepartidorType = {
   patente: string,
   vehiculo: string
 }
 
-type FormType = {
-  nombre: string,
-  email: string;
-  phone: string;
-  password: string,
-  ciudad: string,
-  rol: string;
-};
 
-//tipo repartidor
-type Repartidor = RepartidorType & FormType;
 
 const schemaRepartidor = yup
   .object({
@@ -37,7 +28,7 @@ const schemaRepartidor = yup
 
 
 
-export default function RegisterFormRepartidor({ datosGenerales }: { datosGenerales: FormType }) {
+export default function RegisterFormRepartidor({ datosGenerales }: { datosGenerales: User}) {
 
   const [vehiculoSeleccionado, setvehiculoSeleccionado] = useState({ vehiculo: "Moto" })
 
