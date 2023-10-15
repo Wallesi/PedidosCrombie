@@ -25,7 +25,7 @@ export default function Home() {
                                 <h2 className="card-title">Cliente</h2>
                                 <p>Bla bla</p>
                                 <div className="card-actions">
-                                    <button className="btn btn-primary">Registrate</button>
+                                    <a href='/' className="btn btn-primary">Registrate</a>
                                     <a href="/User" className="btn btn-primary">Menu</a>
                                 </div>
                             </div>
