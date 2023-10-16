@@ -1,4 +1,4 @@
-import { Direction } from "./Direction";
+import { Address } from "./Address";
 import { Review } from "./Review";
 
 export type User = {
@@ -8,7 +8,7 @@ export type User = {
     email: string;
     phoneNumber: string;
     password: string,
-    adress?: Direction;
+    adress?: Address;
     role: string;
     createdAt: Date;
     reviewsHistory?: Review[];

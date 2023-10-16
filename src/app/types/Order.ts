@@ -1,4 +1,4 @@
-import { Direction } from '@/app/types/Direction'
+import { Direction } from '@/app/types/Address'
 
 export type Order = {
     id?:string,

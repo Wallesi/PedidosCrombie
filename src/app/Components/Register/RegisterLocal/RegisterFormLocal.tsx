@@ -3,9 +3,9 @@
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import RegisterSelectInputLocal from './RegisterSelectInputLocal';
 import { useState } from 'react';
-import { User } from "@/app/types/User";
+import FormAdress from "../../FormDirection/FormAdress";
+import RegisterSelectInputLocalCategory from "../../SelectInputLocalCategory/RegisterSelectInputLocalCategory";
 
 type NegocioType = {
   descripcion: string,
@@ -26,7 +26,7 @@ const schemaNegocio = yup
   })
   .required();
 
-export default function RegisterFormLocal({ datosGenerales }: { datosGenerales: User}) {
+export default function RegisterFormLocal() {
 
   const [negocioSeleccionado, setNegocioSeleccionado] = useState("Restaurante")
 
@@ -42,9 +42,10 @@ export default function RegisterFormLocal({ datosGenerales }: { datosGenerales: 
     setNegocioSeleccionado(n)
   }
 
-  const onSubmit = handleSubmit(async (information) => {
+  const onSubmit = handleSubmit(async (information , e: any) => {
+    e.preventDefault()
     information.tipoNegocio = negocioSeleccionado;
-    console.log({ ...datosGenerales, ...information });
+    console.log(information );
   });
 
   return (
@@ -67,7 +68,10 @@ export default function RegisterFormLocal({ datosGenerales }: { datosGenerales: 
         </div>
 
 
-        <RegisterSelectInputLocal onSelectChange={funcionTipoNegocioSeleccionado} />
+        <RegisterSelectInputLocalCategory onSelectChange={funcionTipoNegocioSeleccionado} />
+
+
+        <FormAdress/>
 
         <button className="btn btn-primary w-full" type="submit">
           Registrarse
