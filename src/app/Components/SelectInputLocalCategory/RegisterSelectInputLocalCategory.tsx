@@ -1,4 +1,4 @@
-export default function RegisterSelectInputLocal({ onSelectChange }: { onSelectChange: any }) {
+export default function RegisterSelectInputLocalCategory({ onSelectChange }: { onSelectChange: any }) {
 
   const handleChange = (e: any) => {
     e.target.value === "" ? "Restaurante" : onSelectChange(e.target.value)
@@ -14,6 +14,8 @@ export default function RegisterSelectInputLocal({ onSelectChange }: { onSelectC
         <option>rostiseria</option>
         <option>kiosko</option>
         <option>supermercado</option>
+        <option>heladeria</option>
+        <option>pasteleria</option>
       </select>
     </div>
   )

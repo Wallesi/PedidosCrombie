@@ -19,7 +19,7 @@ const schema = yup
       .required("Por favor ingrese su correo electrónico")
       .email()
       .max(100, "Máximo 100 caracteres para su correo electrónico."),
-      phoneNumber: yup.string()
+    phoneNumber: yup.string()
       .required("Por favor ingrese su número de teléfono")
       .min(9, "Su número debe tener al menos 9 caracteres")
       .max(15, "Máximo 30 caracteres para su número de teléfono."),
@@ -30,7 +30,7 @@ const schema = yup
     role: yup
       .string()
       .required("Debe seleccionar una opción")
-      .default("Cliente"),
+      .default("CLIENT"),
     createdAt: yup
     .date().default(() => new Date()),
   })
@@ -38,8 +38,7 @@ const schema = yup
 
 export default function RegisterForm() {
 
-  const [rol, setRol] = useState({ type: "Cliente" });
-  const [ciudad, setCiudad] = useState({ city: "Misiones" })
+  const [rol, setRol] = useState("CLIENT");
   const [formValue, setFormValue] = useState(false);
   const [data, setData] = useState<User>();
 
@@ -53,18 +52,21 @@ export default function RegisterForm() {
 
 
   function handleSelectChange(value: string) {
-    setRol({ type: value });
+    console.log(value);
+    
+    setRol(value);
   }
 
-  function handleSelectChangeCiudad(value: string) {
-    setCiudad({ city: value })
-  }
 
-  const onSubmit = handleSubmit((information) => {
-    information.role = rol.type
+
+  const onSubmit = handleSubmit((information, e) => {
+    e.preventDefault();
+    information.role = rol
     setFormValue(true)
     setData(information)
     console.log(information);
+
+    //enviar estos datos a la api para crear el objeto
   })
 
   return (
@@ -85,7 +87,7 @@ export default function RegisterForm() {
             type="name"
             {...register("name")}
             name="name"
-            placeholder="nombre"
+            placeholder="Nombre"
           />
           {errors.name?.message ? <p className="h-3 text-red-500">{errors.name?.message}</p> : <p className="h-3"></p>}
         </div>
@@ -100,7 +102,7 @@ export default function RegisterForm() {
             type="apellido"
             {...register("lastName")}
             name="lastName"
-            placeholder="apellido"
+            placeholder="Apellido"
           />
           {errors.lastName?.message ? <p className="h-3 text-red-500">{errors.lastName?.message}</p> : <p className="h-3"></p>}
         </div>
@@ -115,7 +117,7 @@ export default function RegisterForm() {
             type="email"
             {...register("email")}
             name="email"
-            placeholder="email"
+            placeholder="Email"
           />
           {errors.email?.message ? <p className="h-3 text-red-500">{errors.email?.message}</p> : <p className="h-3"></p>}
         </div>
@@ -130,7 +132,7 @@ export default function RegisterForm() {
             type="tel"
             {...register("phoneNumber")}
             name="phoneNumber"
-            placeholder="telefono"
+            placeholder="Telefono"
           />
           {errors.phoneNumber?.message ? <p className="h-3 text-red-500">{errors.phoneNumber?.message}</p> : <p className="h-3"></p>}
         </div>
@@ -151,10 +153,6 @@ export default function RegisterForm() {
         </div>
 
 
-        {/* <RegisterSelectInputCiudad
-          onSelectChange={handleSelectChangeCiudad}
-        /> */}
-
         <SelectInput
           onSelectChange={handleSelectChange}
         />
@@ -163,9 +161,9 @@ export default function RegisterForm() {
 
       </form>
 
-      {data?.role === "Repartidor" ? <RegisterRepartidor datosGenerales={data} />
+      {data?.role === "DELIVERY" ? <RegisterRepartidor datosGenerales={data} />
         :
-        data?.role === "Negocio" ? <RegisterLocal datosGenerales={data} />
+        data?.role === "LOCAL" ? <RegisterLocal datosGenerales={data} />
           :
           null
       }

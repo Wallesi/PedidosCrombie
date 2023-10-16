@@ -1,12 +1,11 @@
 import React from 'react'
-import RegisterFormRepartidor from './RegisterFormRepartidor'
-import { User } from '@/app/types/User'
+import FormVehicle from '../../FormVehicle/FormVehicle'
 
 
-export const RegisterRepartidor = ({datosGenerales} : { datosGenerales: User }) => {
+export const RegisterRepartidor = () => {
   return (
         <div className='h-full'>
-            <RegisterFormRepartidor datosGenerales={datosGenerales}/>
+            <FormVehicle/>
         </div>
   )
 }

@@ -2,8 +2,13 @@ export default function RegisterSelectInput({onSelectChange}:{onSelectChange: an
 
   const handleChange = (event: any) => {
     console.log(event.target.value);
-    
-    event.target.value == "" ? "Cliente" : onSelectChange(event.target.value);
+    if(event.target.value == "Cliente"){
+      return onSelectChange("CLIENT")
+    }else if(event.target.value == "Negocio"){
+      return onSelectChange("LOCAL")
+    }else if(event.target.value == "Repartidor"){
+      return onSelectChange("DELIVERY")
+    }
   };
   
   return (

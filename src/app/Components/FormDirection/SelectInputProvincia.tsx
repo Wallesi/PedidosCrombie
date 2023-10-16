@@ -15,7 +15,7 @@ type Props = {
   onSelectChange: any;
 };
 
-export default function RegisterSelectInputCiudad({ onSelectChange }: Props) {
+export default function SelectInputProvincia({ onSelectChange }: Props) {
   const [provincias, setProvincias] = useState<Provincia[]>([]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function RegisterSelectInputCiudad({ onSelectChange }: Props) {
   }, []);
 
   const handleChange = (event: any) => {
-    event.target.value == "" ? "Misiones" : onSelectChange(event.target.value);
+    event.target.value == "" ? "Misiones" : onSelectChange({ provincia: event.target.value , id: provincias.filter(n => n.nombre === event.target.value)[0].id});
   };
   
   return (
@@ -54,6 +54,4 @@ export default function RegisterSelectInputCiudad({ onSelectChange }: Props) {
       </select>
     </div>
   )
-
-
 }
