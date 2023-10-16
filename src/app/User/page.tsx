@@ -1,51 +1,78 @@
 export default function () {
     return (
         <div className="container mx-auto max-w-screen-lg mt-10 pl-5 pr-5">
-            <h1 className="text-xl text-center pb-2 font-bold">Landing Usuario</h1>
+            <h1 className="text-center text-2xl font-bold pb-5">Landing Usuario</h1>
 
-            <div className="grid grid-cols-3 grid-rows-3 gap-3 mb-0 ">
+            <div className="grid grid-cols-3 grid-rows-3 gap-4 mb-0 ">
 
-                <div className="col-span-1 row-span-1 bg-warning mb-0 p-2 rounded-md">
-                    <div className="flex flex-col items-center justify-center">
-                        <img src="/UserLanding/burguer.svg" className="w-1/2" alt="" />
-                        <h3 className="text-base md:text-xl font-bold text-white">Resturante</h3>
-                    </div>
-                </div>
-                <div className="col-span-2 bg-green-500 mb-0 p-2 flex rounded-md">
-                    <div className="flex flex-col items-center justify-center">
-                        <img src="/UserLanding/groceries.svg" className="w-1/5" alt="" />
-                        <h3 className="text-base md:text-xl font-bold text-white">Mercado</h3>
-                    </div>
-                </div>
-                <div className="row-span-2 bg-green-500 mb-0 p-2 rounded-md">
-                    <div className="flex flex-col items-center justify-center h-full">
-                        <img src="/UserLanding/drinks.svg" className="w-1/2" alt="" />
-                        <h3 className="text-base md:text-xl font-bold text-white">Bebidas</h3>
-                    </div>
-                </div>
-                <div className="bg-yellow-500 mb-0 p-2 rounded-md">
-                    <div className="flex flex-col items-center justify-center">
-                        <img src="/UserLanding/iceCream.svg" className="w-1/2" alt="" />
-                        <h3 className="text-base md:text-xl font-bold text-white">Helado</h3>
-                    </div>
+
+                <div className="col-span-1 row-span-1 bg-warning mb-0 p-2 rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="User/seleccionar">
+                        <div className="flex flex-col items-center justify-center">
+                            <img src="/UserLanding/burguer.svg" className="w-1/2" alt="" />
+                            <h3 className="text-base md:text-xl font-bold text-white">Resturante</h3>
+                        </div>
+                    </a>
                 </div>
 
-                <div className="row-span-1 bg-red-500 mb-0 p-2 rounded-md">
-                    <div className="flex flex-col items-center  justify-center">
-                        <img src="/UserLanding/bakery.svg" className="w-1/2" alt="" />
-                        <h3 className="text-base md:text-xl font-bold text-white">Panaderia</h3>
-                    </div>
+
+
+                <div className="col-span-2 bg-green-500 mb-0 p-2 flex rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="User/seleccionar">
+                        <div className="flex flex-col items-center justify-center">
+                            <img src="/UserLanding/groceries.svg" className="w-1/5" alt="" />
+                            <h3 className="text-base md:text-xl font-bold text-white">Mercado</h3>
+                        </div>
+                    </a>
                 </div>
 
-                <div className="col-span-2 bg-purple-500 p-2 mb-0 text-center rounded-md">
-                    <div className="flex flex-col items-center justify-center">
-                        <img src="/UserLanding/pharmacy.svg" className="w-1/4" alt="" />
-                        <h3 className="text-base md:text-xl font-bold text-white">Farmacia</h3>
-                    </div>
+
+
+                <div className="row-span-2 bg-green-500 mb-0 p-2 rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="User/seleccionar">
+                        <div className="flex flex-col items-center justify-center h-full">
+                            <img src="/UserLanding/drinks.svg" className="w-1/2" alt="" />
+                            <h3 className="text-base md:text-xl font-bold text-white">Bebidas</h3>
+                        </div>
+                    </a>
                 </div>
+
+
+
+                <div className="bg-yellow-500 mb-0 p-2 rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="User/seleccionar">
+                        <div className="flex flex-col items-center justify-center">
+                            <img src="/UserLanding/iceCream.svg" className="w-1/2" alt="" />
+                            <h3 className="text-base md:text-xl font-bold text-white">Helado</h3>
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div className="row-span-1 bg-red-500 mb-0 p-2 rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="User/seleccionar">
+                        <div className="flex flex-col items-center  justify-center">
+                            <img src="/UserLanding/bakery.svg" className="w-1/2" alt="" />
+                            <h3 className="text-base md:text-xl font-bold text-white">Panaderia</h3>
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div className="col-span-2 bg-purple-500 p-2 mb-0 text-center rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="User/seleccionar">
+                        <div className="flex flex-col items-center justify-center ">
+                            <img src="/UserLanding/pharmacy.svg" className="w-1/4" alt="" />
+                            <h3 className="text-base md:text-xl font-bold text-white">Farmacia</h3>
+                        </div>
+                    </a>
+                </div>
+
             </div>
 
- 
+
             <div className="carousel w-full pt-10 pb-10">
                 <div id="slide1" className="carousel-item relative w-full">
                     <img src="/UserLanding/promos/1.jpg" className="w-full" />
@@ -68,7 +95,7 @@ export default function () {
                         <a href="#slide4" className="btn btn-circle">❯</a>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     );
 }
