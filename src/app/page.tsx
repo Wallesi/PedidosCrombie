@@ -25,7 +25,7 @@ export default function Home() {
                                 <h2 className="card-title">Cliente</h2>
                                 <p>Bla bla</p>
                                 <div className="card-actions">
-                                    <a href='/' className="btn btn-primary">Registrate</a>
+                                    <a href='/register' className="btn btn-primary">Registrate</a>
                                     <a href="/User" className="btn btn-primary">Menu</a>
                                 </div>
                             </div>
@@ -79,27 +79,27 @@ export default function Home() {
                             
                                 <div className="flex flex-col md:ml-40 items-start justify-start space-y-6">
                                     <div className="flex gap-2">
-                                        <input type="checkbox" checked="checked" className="checkbox" />
+                                        <input type="checkbox" checked={true} className="checkbox" />
                                         <h1 className="pb-2">Ampliación de la visibilidad</h1>
                                     </div>
                                     <div className="flex gap-2">
-                                        <input type="checkbox" checked="checked" className="checkbox" />
+                                        <input type="checkbox"  checked={true} className="checkbox" />
                                         <h1 className="pb-2">Incremento en las ventas</h1>
                                     </div>
                                     <div className="flex gap-2">
-                                        <input type="checkbox" checked="checked" className="checkbox" />
+                                        <input type="checkbox"  checked={true} className="checkbox" />
                                         <h1 className="pb-2">Marketing efectivo</h1>
                                     </div>
                                     <div className="flex gap-2">
-                                        <input type="checkbox" checked="checked" className="checkbox" />
+                                        <input type="checkbox"  checked={true} className="checkbox" />
                                         <h1 className="pb-2">Gestión simplificada de pedidos</h1>
                                     </div>
                                     <div className="flex gap-2">
-                                        <input type="checkbox" checked="checked" className="checkbox" />
+                                        <input type="checkbox" checked={true} className="checkbox" />
                                         <h1 className="pb-2">Recopilación de datos y retroalimentación</h1>
                                     </div>
                                     <div className="flex gap-2">
-                                        <input type="checkbox" checked="checked" className="checkbox" />
+                                        <input type="checkbox"  checked={true} className="checkbox" />
                                         <h1 className="pb-2">Flexibilidad y conveniencia para tus clientes</h1>
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@ export default function SelectInputProvincia({ onSelectChange }: Props) {
     fetchData();
   }, []);
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: { target: { value: string; }; }) => {
     event.target.value == "" ? "Misiones" : onSelectChange({ provincia: event.target.value , id: provincias.filter(n => n.nombre === event.target.value)[0].id});
   };
   

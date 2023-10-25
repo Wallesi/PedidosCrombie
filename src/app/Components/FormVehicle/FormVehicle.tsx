@@ -16,7 +16,9 @@ const schemaVehicle = yup.object().shape({
       .matches(/^\d{6}$/, "La patente debe contener exactamente 6 dígitos"),
   });
 
-export default function FormVehicle() {
+export default function FormVehicle({id}:{id:string}) {
+  const [data, setData] = useState();
+
   const [vehiculoSeleccionado, setvehiculoSeleccionado] = useState({
     vehiculo: "Moto",
   });
@@ -35,7 +37,26 @@ export default function FormVehicle() {
 
   const onSubmit = handleSubmit(async (information) => {
     information.type = vehiculoSeleccionado.vehiculo;
-    console.log(information);
+    try {
+      const response = await fetch(
+        `https://pedidos-crombie-production.up.railway.app/vehicles/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(information),
+        }
+      );
+      if (response.ok) {
+        const responseData = await response.json();
+        setData(responseData);
+      } else {
+        console.error("Error al enviar datos a la API:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error en la solicitud fetch:", error);
+    }
   });
 
   return (

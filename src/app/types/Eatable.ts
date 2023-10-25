@@ -1,12 +1,10 @@
-import { Order } from "./Order";
-
 export type Eatable = {
-    name: string;
+    title: string;
     description: string;
-    photo: string;
-    price: number;
-    type: string;
-    orders: Order[];
-    restaurant: Restaurant;
-    menuType: 'SALTY' | 'SWEET' | 'BEBERAGE';
+    photo?: string;
+    price: string;
+    menuType?: string;
+    name?: string;
 }
+
+//si no tiene signo de pregunta es obligatorio poner required en yup

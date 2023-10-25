@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 export const NavBar = () => {
@@ -29,8 +30,8 @@ export const NavBar = () => {
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
               <a href="/perfil" className="btn btn-accent mr-4">Perfil</a>
-              <button className="btn btn-neutral mr-4">Register</button>
-              <button className="btn btn-accent">Login</button>
+              <Link href="/register"><button className="btn btn-neutral mr-4">Register</button></Link>
+              <Link href="/login"><button className="btn btn-accent">Login</button></Link>
             </ul>
           </div>
         </div>
