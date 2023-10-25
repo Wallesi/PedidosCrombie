@@ -21,14 +21,13 @@ interface Municipio {
     }, [id]);
   
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const selectedValue = event.target.value;
-      onSelectChangeCiudad(selectedValue);
+      onSelectChangeCiudad(event.target.value);
     };
   
     return (
       <div className="w-full">
         <div className="mb-2 block">
-          <label htmlFor="">Seleccione su provincia</label>
+          <label htmlFor="">Seleccione su ciudad</label>
         </div>
         <select
           className='select select-primary w-full'

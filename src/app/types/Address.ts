@@ -1,10 +1,10 @@
 export type Address = {
   id?: string;
-  //elimine country
+  country: string;
   state: string;
   city: string;
   CP: string;
   street: string;
   number: string;
-  //elimine apartment
+  apartment?: string;
 };

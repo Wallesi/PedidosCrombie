@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
-import SelectInput from './RegisterSelectInput';
 import { useState } from 'react';
 import { RegisterRepartidor } from './RegisterRepartidor/RegisterRepartidor';
 import { RegisterLocal } from "./RegisterLocal/RegisterLocal";
 import { User } from "@/app/types/User"
+import SelectInputUserType from "../SelectInputUserType/SelectInputUserType";
 
 
 const schema = yup
@@ -40,7 +40,7 @@ export default function RegisterForm() {
 
   const [rol, setRol] = useState("CLIENT");
   const [formValue, setFormValue] = useState(false);
-  const [data, setData] = useState<User>();
+  const [data, setData] = useState("CLIENT");
 
   const {
     register,
@@ -50,23 +50,23 @@ export default function RegisterForm() {
     resolver: yupResolver(schema)
   })
 
-
   function handleSelectChange(value: string) {
-    console.log(value);
-    
     setRol(value);
   }
 
-
-
   const onSubmit = handleSubmit((information, e) => {
-    e.preventDefault();
+    e?.preventDefault();
     information.role = rol
     setFormValue(true)
-    setData(information)
-    console.log(information);
-
+    setData(rol)
     //enviar estos datos a la api para crear el objeto
+    fetch('https://pedidos-crombie-production.up.railway.app/auth/register', {
+      method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(information)
+      })
   })
 
   return (
@@ -153,20 +153,13 @@ export default function RegisterForm() {
         </div>
 
 
-        <SelectInput
+        <SelectInputUserType title="Registrarme como"
           onSelectChange={handleSelectChange}
         />
 
         <button type="submit" className="btn btn-primary w-full">Continuar</button>
 
       </form>
-
-      {data?.role === "DELIVERY" ? <RegisterRepartidor datosGenerales={data} />
-        :
-        data?.role === "LOCAL" ? <RegisterLocal datosGenerales={data} />
-          :
-          null
-      }
     </div>
   )
 }

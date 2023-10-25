@@ -70,9 +70,6 @@ export default function RegisterFormLocal() {
 
         <RegisterSelectInputLocalCategory onSelectChange={funcionTipoNegocioSeleccionado} />
 
-
-        <FormAdress/>
-
         <button className="btn btn-primary w-full" type="submit">
           Registrarse
         </button>
