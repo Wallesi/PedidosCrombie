@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
-export const NavBar = () => {
+export const NavProfiles = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -29,8 +29,7 @@ export const NavBar = () => {
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
-              <Link href="/register"><button className="btn btn-neutral mr-4">Register</button></Link>
-              <Link href="/login"><button className="btn btn-accent">Login</button></Link>
+              <Link href="/perfil" className="btn btn-accent mr-4">Perfil</Link>
             </ul>
           </div>
         </div>
@@ -47,4 +46,4 @@ export const NavBar = () => {
 
   );
 }
-export default NavBar;
+export default NavProfiles;

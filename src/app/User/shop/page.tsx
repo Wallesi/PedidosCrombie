@@ -1,72 +1,51 @@
 export default function () {
     return (
-        <div className="container mx-auto max-w-screen-lg pl-10 pr-10">
+        <div className="container mx-auto max-w-screen-lg pl-20 pr-20">
+
+            <h1 className="text-center text-2xl font-bold pt-10">Bienvenido! "Nombre Negocio"</h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-10 pb-10">
 
 
-            <div className="border rounded-lg shadow-md">
-                <div className="hero h-40 bg-base-200" style={{ backgroundImage: 'url(/Home/chef.jpg)' }}>
-
-                </div>
-                <div className="flex items-center justify-between  p-4">
-                    <div className="flex gap-2">
-                        <img src="/UserLanding/restaurant.svg" className="w-1/12 border rounded-full p-1" alt="" />
-                        <div>
-                            <h1>Nombre Restaurante</h1>
-                            <p>Descuento 20%</p>
-                            <p>15-20min - Envio $500</p>
+                <div className="col-span-1 bg-info mb-3 p-2 rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="/Delivery/pedidos">
+                        <div className="flex flex-col items-center justify-center p-3">
+                            <h4 className="text-white font-semibold text-2xl md:text-lg">Gestionar Menus</h4>
+                            <img className="w-2/4 md:w-4/5 p-4 pt-3" src="/Delivery/order.svg" alt="" />
                         </div>
-                    </div>
-                    <div className="flex items-center justify-center gap-3">
-                        <img src="/UserLanding/star.svg" className="w-8" alt="" />
-                        <p className="text-lg">4</p>
+                    </a>
+                </div>
+
+
+
+                <div className="col-span-1 bg-info mb-3 p-2 rounded-md hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="/Delivery/historial">
+                        <div className="flex flex-col items-center justify-center p-3">
+                            <h4 className="text-white font-semibold text-2xl md:text-lg">Gestionar Pedidos</h4>
+                            <img className="w-2/4 md:w-4/5 p-4 pt-3" src="/Delivery/check.svg" alt="" />
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div className="col-span-1 bg-info mb-3 p-2 rounded-md hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <a href="/Delivery/historial">
+                        <div className="flex flex-col items-center justify-center p-3">
+                            <h4 className="text-white font-semibold text-2xl md:text-lg">Historial Pedidos</h4>
+                            <img className="w-2/4 md:w-4/5 p-4 pt-3" src="/Delivery/check.svg" alt="" />
+                        </div>
+                    </a>
+                </div>
+
+                <div className="col-span-1 bg-info mb-3 p-2 rounded-md hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
+                    <div className="flex flex-col items-center justify-center p-3">
+                        <h4 className="text-white font-semibold text-2xl md:text-lg">Mi perfil</h4>
+                        <img className="w-2/5 md:w-8/12 p-4 pt-5" src="/Delivery/profile.svg" alt="" />
                     </div>
                 </div>
+
             </div>
-
-            <input type="text" placeholder="Type here" className="input input-bordered w-full mt-5" />
-
-            <div className="grid grid-cols-3 gap-2 mt-5 mb-5">
-                <div className="p-2 border rounded-lg flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                        <img src="/UserLanding/burguer.svg" className="w-16" alt="" />
-                        <div>
-                            <h1>Hamburguesa</h1>
-                            <p>$1500</p>
-                        </div>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-
-                </div>
-                <div className="p-2 border rounded-lg flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                        <img src="/UserLanding/burguer.svg" className="w-16" alt="" />
-                        <div>
-                            <h1>Hamburguesa</h1>
-                            <p>$1500</p>
-                        </div>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-
-                </div>
-                <div className="p-2 border rounded-lg flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                        <img src="/UserLanding/burguer.svg" className="w-16" alt="" />
-                        <div>
-                            <h1>Hamburguesa</h1>
-                            <p>$1500</p>
-                        </div>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-
-                </div>
-            </div>
-
         </div>
     )
 }

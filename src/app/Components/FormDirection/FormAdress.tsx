@@ -68,13 +68,13 @@ export default function FormAdress({ id, type }: { id: string; type: string }) {
         if (response.ok) {
           const responseData = await response.json();
           setData(responseData);
-          console.log(responseData);
         } else {
           console.error("Error al enviar datos a la API:", response.statusText);
         }
       } catch (error) {
         console.error("Error en la solicitud fetch:", error);
       }
+
     } else if (type === "LOCAL") {
       try {
         const response = await fetch(
@@ -90,7 +90,6 @@ export default function FormAdress({ id, type }: { id: string; type: string }) {
         if (response.ok) {
           const responseData = await response.json();
           setData(responseData);
-          console.log(responseData);
         } else {
           console.error("Error al enviar datos a la API:", response.statusText);
         }

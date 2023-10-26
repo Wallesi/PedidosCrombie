@@ -1,14 +1,16 @@
-export default function Home() {
+import NavBar from "./Components/Nav";
 
+export default function Home() {
 
   return (
     <div className="">
+        <NavBar />
             <div className="hero min-h-screen z-10" style={{ backgroundImage: 'url(/Home/Portada.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
                         <h1 className="mb-5 text-5xl font-bold">Pedidos Crombie</h1>
-                        <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                        <p className="mb-5">Pedidos crombie es la aplicación definitiva para satisfacer tus antojos gastronómicos con comodidad y rapidez. Ya sea que estés buscando una deliciosa comida casera, un plato étnico auténtico o simplemente una entrega de tu restaurante favorito, Pedidos crombie te conecta con una amplia variedad de opciones culinarias a solo un toque de distancia.</p>
                     </div>
                 </div>
             </div>
