@@ -1,5 +1,5 @@
 "use client";
-
+import { setCookie } from 'nookies';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import FormVehicle from "../FormVehicle/FormVehicle";
 import { useRouter } from "next/navigation";
 import { FormAddTitleAndTypeLocal } from "../FormAddTitleAndTypeLocal/FormAddTitleAndTypeLocal";
 import { Toaster, toast } from 'sonner';
+import { FormMenuesRegisterLocal } from "../FormMenuesRegisterLocal/FormMenuesRegisterLocal";
 
 type loginSchema = {
   email: string;
@@ -18,6 +19,7 @@ type loginSchema = {
 type dataType = {
   token: string,
   isValid: number,
+  menuValidator: number,
   type: string,
   idRol:string
 }
@@ -65,9 +67,14 @@ export default function LoginForm() {
       router.push("/user/client/seleccionar")
     }
 
-    if (data?.isValid == 1 && data?.type === 'LOCAL'){
+    if (data?.menuValidator == 1 && data?.type === 'LOCAL'){
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, // Tiempo de vida de una semana
+        path: '/',
+      });
       toast.success("has iniciado sesion correctamente")
-      router.push("/")
+      router.push("/user/shop")
     }
 
     if (data?.isValid == 1 && data?.type === 'DELIVERY'){
@@ -75,14 +82,18 @@ export default function LoginForm() {
       router.push("/user/delivery")
     }
 
-
     if(data?.isValid == -1 && data?.type === 'CLIENT'){
       return <FormAdress id={data?.idRol} type='CLIENT'/> 
     }
 
     if(data?.isValid == -1 && data?.type === 'LOCAL'){   
-      return <FormAddTitleAndTypeLocal id={data?.idRol}/>
+      return <FormAddTitleAndTypeLocal id={data?.idRol} typeCrud='CREATE'/>
     }
+    
+    if(data?.menuValidator == -1 && data?.type === 'LOCAL'){   
+      return <FormMenuesRegisterLocal id={data?.idRol}/>
+    }
+
 
     if(data?.isValid == -1 && data?.type === 'DELIVERY'){   
       return <FormVehicle id={data?.idRol}/> 
@@ -92,7 +103,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="max-w-xl w-full">
+    <div className="max-w-xl w-full mx-auto">
       <form className={!validData ? `flex flex-col gap-4 w-full items-center` : "hidden"} onSubmit={onSubmit}>
         <div>
           <h3 className="text-center text-black text-2xl font-medium leading-9">

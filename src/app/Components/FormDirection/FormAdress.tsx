@@ -26,7 +26,7 @@ const schemaAddress = yup.object().shape({
   apartment: yup.string(),
 });
 
-export default function FormAdress({ id, type }: { id: string; type: string }) {
+export default function FormAdress({ id, type}: { id: string; type: string }) {
   const [provincia, setProvincia] = useState({ provincia: "Misiones", id: 54 });
   const [ciudad, setCiudad] = useState("APOSTOLES");
   const [data, setData] = useState();
@@ -40,11 +40,12 @@ export default function FormAdress({ id, type }: { id: string; type: string }) {
   });
 
   function handleSelectChangeProvincia(value: any) {
-    setProvincia(value);
+
+    setProvincia(value.toUpperCase());
   }
 
   function handleSelectChangeCiudad(value: string) {
-    setCiudad(value);
+    setCiudad(value.toUpperCase());
   }
 
   const onSubmit = handleSubmit(async (information, e) => {

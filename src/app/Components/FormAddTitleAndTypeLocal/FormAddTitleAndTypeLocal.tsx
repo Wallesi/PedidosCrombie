@@ -1,3 +1,5 @@
+'use client'
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -5,6 +7,8 @@ import * as yup from "yup";
 import React, { useState } from "react";
 import RegisterSelectInputLocalCategory from "../SelectInputLocalCategory/RegisterSelectInputLocalCategory";
 import FormAdress from "../FormDirection/FormAdress";
+
+type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
 
 type localType = {
   localName: string;
@@ -24,7 +28,7 @@ const schema = yup.object({
   type: yup.string(),
 });
 
-export const FormAddTitleAndTypeLocal = ({ id }: { id: string}) => {
+export const FormAddTitleAndTypeLocal = ({ id, typeCrud }: { id: string, typeCrud: crudTypes}) => {
   const [typeLocal, setTypeLocal] = useState<string>("RESTAURANT");
   const [validData, setValidData] = useState<boolean>(false)
 
@@ -43,7 +47,7 @@ export const FormAddTitleAndTypeLocal = ({ id }: { id: string}) => {
   const onSubmit = handleSubmit (async (information, e) => {
     e?.preventDefault();
     information.type = typeLocal;
-    try {
+      try {
         const response = await fetch(`https://pedidos-crombie-production.up.railway.app/locals/${id}`, {
           method: "PATCH",
           headers: {
@@ -112,7 +116,7 @@ export const FormAddTitleAndTypeLocal = ({ id }: { id: string}) => {
         <RegisterSelectInputLocalCategory onSelectChange={handleChange} />
 
         <button className="btn btn-primary w-full" type="submit">
-          Continuar
+          {typeCrud}
         </button>
       </form>
 

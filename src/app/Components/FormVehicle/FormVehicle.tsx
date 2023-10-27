@@ -16,7 +16,7 @@ const schemaVehicle = yup.object().shape({
       .matches(/^\d{6}$/, "La patente debe contener exactamente 6 dígitos"),
   });
 
-export default function FormVehicle({id}:{id:string}) {
+export default function FormVehicle({id, token}:{id:string}) {
   const [data, setData] = useState();
 
   const [vehiculoSeleccionado, setvehiculoSeleccionado] = useState({
@@ -44,6 +44,7 @@ export default function FormVehicle({id}:{id:string}) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(information),
         }

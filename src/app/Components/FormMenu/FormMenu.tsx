@@ -15,13 +15,13 @@ const schemaMenu = yup.object().shape({
   name: yup.string()
 });
 
-export default function FormMenu() {
+export default function FormMenu({id, counter} : {id:string, counter:any}) {
   const [menuType, setmenuType] = useState("SWEET");
   const [image, setImage] = useState("")
 
   const imageInputRef = useRef(null); // Create a ref for the file input
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: any) => {
     const file = e.target.files[0]; // Get the selected file
     const objectURL = URL.createObjectURL(file); // Create a URL for the selected file
     setImage(objectURL); // Set the image state with the URL
@@ -49,24 +49,31 @@ export default function FormMenu() {
   const onSubmit = handleSubmit(async (information, e: any) => {
     e.preventDefault();
     information.menuType = menuType;
-    information.photo = image;
-
-    console.log(information);
-    
-    
-    fetch('https://pedidos-crombie-production.up.railway.app/eatables/2816ab9f-b8e4-4a06-be0e-5d831db94441', {
+    information.photo = image;    
+    try {
+      const response = await fetch(`https://pedidos-crombie-production.up.railway.app/eatables/${id}`, {
         method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(information)
-        })
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(information),
+      });
+      if (response.ok) {
+        if (typeof counter === 'function') {
+          counter(1);
+        }
+      } 
+    } catch (error) {
+      console.error("Error en la solicitud fetch:", error);
+    }
   });
 
+
+
   return (
-    <div className="w-full max-w-2xl items-center justify-center">
+    <div className="w-full max-w-2xl items-center justify-center align-middle">
       <form className="flex flex-col items-center gap-4" onSubmit={onSubmit}>
-        <div className="block mb-5">
+        <div className="block mb-5 w-full">
           <label className="font-medium">Nombre del menu</label>
           <input
             type="text"
@@ -82,7 +89,7 @@ export default function FormMenu() {
           )}
         </div>
 
-        <div className="block mb-5">
+        <div className="block mb-5 w-full">
           <label className="font-medium">Nombre del alimento</label>
           <input
             type="text"
@@ -93,7 +100,7 @@ export default function FormMenu() {
           />
         </div>
 
-        <div className="block mb-5">
+        <div className="block mb-5 w-full">
           <label className="font-medium">Descipcion del menu</label>
           <input
             type="text"
@@ -109,7 +116,7 @@ export default function FormMenu() {
           )}
         </div>
 
-        <div className="block mb-5">
+        <div className="block mb-5 w-full">
           <label className="font-medium">Precio</label>
           <input
             type="number"
@@ -120,7 +127,7 @@ export default function FormMenu() {
           />
         </div>
 
-        <div className="block mb-5">
+        <div className="mb-5 w-full flex flex-col">
           <label className="font-medium">Ingrese una imagen ilustrativa</label>
           <input
             type="file"
@@ -130,7 +137,7 @@ export default function FormMenu() {
           />
         </div>
 
-        <div className="block mb-5">
+        <div className="block mb-5 w-full">
           <label className="font-medium">Ingrese el tipo de comida</label>
           <select
             className="select select-primary w-full"

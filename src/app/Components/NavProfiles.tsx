@@ -29,7 +29,7 @@ export const NavProfiles = () => {
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
-              <Link href="/perfil" className="btn btn-accent mr-4">Perfil</Link>
+              <Link href="/user/perfil" className="btn btn-accent mr-4">Perfil</Link>
             </ul>
           </div>
         </div>
