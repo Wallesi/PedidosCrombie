@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Address } from "@/app/types/Address";
 import SelectInputProvincia from "./SelectInputProvincia";
 import SelectInputCiudades from "./SelectFormCiudades";
+import { parseCookies } from "nookies";
 
 const schemaAddress = yup.object().shape({
   country: yup.string().default("Argentina"),
@@ -27,6 +28,8 @@ const schemaAddress = yup.object().shape({
 });
 
 export default function FormAdress({ id, type}: { id: string; type: string }) {
+  const cookies = parseCookies();
+  const userId = cookies.userId;
   const [provincia, setProvincia] = useState({ provincia: "Misiones", id: 54 });
   const [ciudad, setCiudad] = useState("APOSTOLES");
   const [data, setData] = useState();
@@ -41,17 +44,17 @@ export default function FormAdress({ id, type}: { id: string; type: string }) {
 
   function handleSelectChangeProvincia(value: any) {
 
-    setProvincia(value.toUpperCase());
+    setProvincia(value);
   }
 
   function handleSelectChangeCiudad(value: string) {
-    setCiudad(value.toUpperCase());
+    setCiudad(value);
   }
 
   const onSubmit = handleSubmit(async (information, e) => {
     e?.preventDefault();
-    information.state = provincia.provincia;
-    information.city = ciudad;
+    information.state = provincia.provincia.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '').toUpperCase();
+    information.city = ciudad.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '').toUpperCase();
     information.country = "Argentina";
 
     if (type === "CLIENT") {
@@ -62,6 +65,7 @@ export default function FormAdress({ id, type}: { id: string; type: string }) {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${userId}`
             },
             body: JSON.stringify(information),
           }

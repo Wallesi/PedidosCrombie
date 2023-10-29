@@ -2,7 +2,7 @@
 export default function SelectformInputVehicle({onSelectChange}:{onSelectChange: any}) {
 
     const handleChange = (e: any) => {
-      e.target.value === "" ? "Moto" : onSelectChange(e.target.value)
+      e.target.value === "" ? "MOTO" : onSelectChange(e.target.value)
     }  
   
     return (
@@ -18,13 +18,13 @@ export default function SelectformInputVehicle({onSelectChange}:{onSelectChange:
         >
           <option disabled selected>Seleccione su vehiculo</option>
           <option>
-            Moto
+            MOTO
           </option>
           <option>
-            Bicicleta
+           BICICLETA
           </option>
           <option>
-            Auto
+            AUTO
           </option>
         </select>
       </div>

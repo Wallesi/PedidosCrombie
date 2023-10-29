@@ -29,7 +29,7 @@ export default function SelectInputProvincia({ onSelectChange }: Props) {
   }, []);
 
   const handleChange = (event: { target: { value: string; }; }) => {
-    event.target.value == "" ? "Misiones" : onSelectChange({ provincia: event.target.value , id: provincias.filter(n => n.nombre === event.target.value)[0].id});
+    event.target.value == "" ? "MISIONES" : onSelectChange({ provincia: event.target.value , id: provincias.filter(n => n.nombre === event.target.value)[0].id});
   };
   
   return (

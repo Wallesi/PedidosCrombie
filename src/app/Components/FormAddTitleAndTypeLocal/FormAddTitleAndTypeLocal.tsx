@@ -3,10 +3,11 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
 import React, { useState } from "react";
 import RegisterSelectInputLocalCategory from "../SelectInputLocalCategory/RegisterSelectInputLocalCategory";
 import FormAdress from "../FormDirection/FormAdress";
+import { parseCookies } from "nookies";
+
 
 type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
 
@@ -28,7 +29,11 @@ const schema = yup.object({
   type: yup.string(),
 });
 
-export const FormAddTitleAndTypeLocal = ({ id, typeCrud }: { id: string, typeCrud: crudTypes}) => {
+export const FormAddTitleAndTypeLocal = ({ typeCrud }: { typeCrud: crudTypes}) => {
+  const cookies = parseCookies();
+  const userId = cookies.userId;
+  const token = cookies.token;
+
   const [typeLocal, setTypeLocal] = useState<string>("RESTAURANT");
   const [validData, setValidData] = useState<boolean>(false)
 
@@ -48,10 +53,11 @@ export const FormAddTitleAndTypeLocal = ({ id, typeCrud }: { id: string, typeCru
     e?.preventDefault();
     information.type = typeLocal;
       try {
-        const response = await fetch(`https://pedidos-crombie-production.up.railway.app/locals/${id}`, {
+        const response = await fetch(`https://pedidos-crombie-production.up.railway.app/locals/${userId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(information),
         });
@@ -120,7 +126,7 @@ export const FormAddTitleAndTypeLocal = ({ id, typeCrud }: { id: string, typeCru
         </button>
       </form>
 
-      { validData ? <FormAdress id={id} type='LOCAL'/> : null}
+      { validData ? <FormAdress id={userId} type='LOCAL'/> : null}
     </div>
   );
 };

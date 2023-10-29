@@ -62,38 +62,77 @@ export default function LoginForm() {
   });
 
   const dataRecived = () => {
-    if (data?.isValid == 1 && data?.type === 'CLIENT'){
-      toast.success("has iniciado sesion correctamente")
-      router.push("/user/client/seleccionar")
-    }
 
-    if (data?.menuValidator == 1 && data?.type === 'LOCAL'){
+    if (data?.isValid == 1 && data?.type === 'CLIENT'){
       const userId = data?.idRol
       setCookie(null, 'userId', userId, {
-        maxAge: 60 * 60 * 24 * 7, // Tiempo de vida de una semana
+        maxAge: 60 * 60 * 24 * 7, 
         path: '/',
       });
-      toast.success("has iniciado sesion correctamente")
-      router.push("/user/shop")
-    }
 
-    if (data?.isValid == 1 && data?.type === 'DELIVERY'){
+      setCookie(null, 'rol', data?.type, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
       toast.success("has iniciado sesion correctamente")
-      router.push("/user/delivery")
+      router.push("/user/client/seleccionar")
     }
 
     if(data?.isValid == -1 && data?.type === 'CLIENT'){
       return <FormAdress id={data?.idRol} type='CLIENT'/> 
     }
 
+    if (data?.menuValidator == 1 && data?.type === 'LOCAL'){
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      setCookie(null, 'rol', data?.type, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+      
+      toast.success("has iniciado sesion correctamente")
+      router.push("/user/shop")
+    }
+
     if(data?.isValid == -1 && data?.type === 'LOCAL'){   
-      return <FormAddTitleAndTypeLocal id={data?.idRol} typeCrud='CREATE'/>
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      const token = data?.token
+      setCookie(null, 'token', token, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      return <FormAddTitleAndTypeLocal typeCrud='CREATE'/>
     }
     
     if(data?.menuValidator == -1 && data?.type === 'LOCAL'){   
-      return <FormMenuesRegisterLocal id={data?.idRol}/>
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+      return <FormMenuesRegisterLocal/>
     }
 
+    if (data?.isValid == 1 && data?.type === 'DELIVERY'){
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+      toast.success("has iniciado sesion correctamente")
+      router.push("/user/delivery")
+    }
 
     if(data?.isValid == -1 && data?.type === 'DELIVERY'){   
       return <FormVehicle id={data?.idRol}/> 

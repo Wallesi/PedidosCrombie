@@ -1,8 +1,25 @@
 "use client"
 import Link from "next/link";
+import { parseCookies } from "nookies";
 import React from "react";
 import { useState } from "react";
 export const NavProfiles = () => {
+  
+  const cookies = parseCookies();
+  const [cooky, setCokky] = useState(cookies.rol)
+
+  if(cooky === 'LOCAL') {
+    setCokky('shop')
+  }
+  if(cooky === 'DELIVERY') {
+    setCokky('delivery')
+  }
+  if(cooky === 'CLIENT') {
+    setCokky('client')
+  }
+
+
+  
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -29,7 +46,7 @@ export const NavProfiles = () => {
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
-              <Link href="/user/perfil" className="btn btn-accent mr-4">Perfil</Link>
+              <Link href={`/user/${cooky}`} className="btn btn-accent mr-4">menu</Link>
             </ul>
           </div>
         </div>
@@ -38,8 +55,7 @@ export const NavProfiles = () => {
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-black">
           {/* Sidebar content here */}
-          <button className="btn btn-neutral">Register</button>
-          <button className="btn btn-accent mt-5">Login</button>
+          <button className="btn btn-neutral"><Link href={`/user/${cooky}`} className="btn btn-accent mr-4">menu</Link></button>
         </ul>
       </div>
     </div>
