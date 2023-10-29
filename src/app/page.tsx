@@ -60,7 +60,8 @@ export default function Home() {
                                 <h2 className="card-title">Restaurante</h2>
                                 <p>Regístrate y forma parte de nuestra comunidad gastronómica. Únete a otros chefs y emprendedores culinarios exitosos y lleva tus sabores a donde nunca imaginaste. Estamos aquí para servirte en el camino hacia el éxito gastronómico. ¡Regístrate hoy y prepárate para llevar tus delicias culinarias a un público hambriento de sabor!</p>
                                 <div className="card-actions">
-                                <Link href="/register" className="btn btn-primary">Registrarse</Link>
+                                    <button className="btn btn-primary">Registrate</button>
+                                    <a href='/negocio' className="btn btn-primary">Menu</a>
                                 </div>
                             </div>
                         </div>
