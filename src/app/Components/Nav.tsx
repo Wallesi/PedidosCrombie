@@ -21,6 +21,7 @@ export const NavBar = () => {
             </label>
           </div>
 
+          
           <div className="flex-1 px-2 mx-2 text-xl text-white font-bold">
               <img className="w-12 mr-2" src="/Home/logo2.png" alt="" />
               <a href="/">Pedidos Crombie</a>
@@ -29,6 +30,9 @@ export const NavBar = () => {
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
+              <a href="/shopCart" className="btn bg-red-700 mr-4 border-none">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAT1JREFUSEvN1CEsRlEYxvHfNyMQbaaZTBNIkiJogsJIhqIwySbaREwwQzFBExRBMoJEUBTFRjCbYAI7du929+377j1cn3nLDec57/8853nPrWhwVRrc358CPhI3r9jG/G+4yzpIAWnfIZyWhdS6okWs4hgjjQC04wFN6MJ9GUi9kPcxXqLxIcbC/nqAAZyXANygNw8Q1q7Rg0nsRcKCbgJLSY6572AaW7hEfwSgDU9oQSceixy0JqLw7cNVAWQKOzjBcKotesnrmMMuQoO8OsNgEm4I+auKACGDkMUbOvBSh9CNOzwnuvdYQNClJ1vAWh3ACpaTzGaymiIHQRvm+SAi5CAJ433xXUAzbhGuIa+OMFotiHEQefjasljABmaxmUxVtlveWuEUpY2yv/LqQ+WtRQMa7uDHOcRm8H8Bn2QFNRlXu2umAAAAAElFTkSuQmCC"/>
+              </a>
               <a href="/perfil" className="btn btn-accent mr-4">Perfil</a>
               <Link href="/register"><button className="btn btn-neutral mr-4">Register</button></Link>
               <Link href="/login"><button className="btn btn-accent">Login</button></Link>
