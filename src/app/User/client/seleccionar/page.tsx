@@ -1,18 +1,28 @@
+'use client'
+
 export default function () {
+
+    const filterByTypeRestaurant = () => {
+        
+    }
+
     return (
         <div className="container mx-auto max-w-screen-lg pl-10 pr-10">
 
-            <input type="text" placeholder="Type here" className="input input-bordered w-full mt-5" />
+           <div className="flex justify-between items-center mt-5">
+             <input type="text" placeholder="Nombre del restaurante" className="input input-bordered w-1/2" />
+            <button className="btn btn-primary">Buscar</button>
+           </div>
 
             <div className="grid grid-cols-3  md:grid-cols-6 gap-4 pt-5">
 
                 <div className="md:col-span-1 bg-orange-400 rounded-xl p-2 hover:bg-indigo-500 duration-300">
-                    <a href="/User/seleccionar/shoplanding">
+                    <button onClick={filterByTypeRestaurant}>
                         <div className="flex flex-col items-center justify-center">
                             <img src="/UserLanding/burguer.svg" className="w-1/2" alt="" />
                             <h3 className="text-base font-bold text-white">Resturante</h3>
                         </div>
-                    </a>
+                    </button>
                 </div>
 
                 <div className="md:col-span-1 bg-green-500 rounded-xl p-2 hover:bg-indigo-500 duration-300">

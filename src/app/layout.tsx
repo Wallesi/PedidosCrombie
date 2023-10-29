@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavBar from './Components/Nav'
 import Footer from './Components/Footer'
+import { Toaster} from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,9 +21,7 @@ export default function RootLayout({
     <html lang="en" data-theme="light">
       <body className={inter.className}>
         <div className='container-xl mx-auto'>
-          
-            <NavBar />
-          
+          <Toaster richColors/>
           {children}
           <Footer />
         </div>

@@ -1,12 +1,15 @@
 "use client";
-
+import { setCookie } from 'nookies';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 import FormAdress from "../FormDirection/FormAdress";
 import FormVehicle from "../FormVehicle/FormVehicle";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormAddTitleAndTypeLocal } from "../FormAddTitleAndTypeLocal/FormAddTitleAndTypeLocal";
+import { Toaster, toast } from 'sonner';
+import { FormMenuesRegisterLocal } from "../FormMenuesRegisterLocal/FormMenuesRegisterLocal";
 
 type loginSchema = {
   email: string;
@@ -16,6 +19,7 @@ type loginSchema = {
 type dataType = {
   token: string,
   isValid: number,
+  menuValidator: number,
   type: string,
   idRol:string
 }
@@ -27,6 +31,8 @@ const schemaLogin = yup.object({
 
 export default function LoginForm() {
   const [data, setData] = useState<dataType>()
+  const [validData, setValidData] = useState<boolean>(false)
+  const router = useRouter()
 
   const {
     register,
@@ -48,6 +54,7 @@ export default function LoginForm() {
       });
       if (response.ok) {
         setData(await response.json());
+        setValidData(true);
       } 
     } catch (error) {
       console.error("Error en la solicitud fetch:", error);
@@ -55,16 +62,76 @@ export default function LoginForm() {
   });
 
   const dataRecived = () => {
+
     if (data?.isValid == 1 && data?.type === 'CLIENT'){
-      return <Link href="/Delivery"/>
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      setCookie(null, 'rol', data?.type, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      toast.success("has iniciado sesion correctamente")
+      router.push("/user/client/seleccionar")
     }
 
     if(data?.isValid == -1 && data?.type === 'CLIENT'){
       return <FormAdress id={data?.idRol} type='CLIENT'/> 
     }
 
+    if (data?.menuValidator == 1 && data?.type === 'LOCAL'){
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      setCookie(null, 'rol', data?.type, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+      
+      toast.success("has iniciado sesion correctamente")
+      router.push("/user/shop")
+    }
+
     if(data?.isValid == -1 && data?.type === 'LOCAL'){   
-      return <FormAdress id={data?.idRol} type='LOCAL'/> 
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      const token = data?.token
+      setCookie(null, 'token', token, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+
+      return <FormAddTitleAndTypeLocal typeCrud='CREATE'/>
+    }
+    
+    if(data?.menuValidator == -1 && data?.type === 'LOCAL'){   
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+      return <FormMenuesRegisterLocal/>
+    }
+
+    if (data?.isValid == 1 && data?.type === 'DELIVERY'){
+      const userId = data?.idRol
+      setCookie(null, 'userId', userId, {
+        maxAge: 60 * 60 * 24 * 7, 
+        path: '/',
+      });
+      toast.success("has iniciado sesion correctamente")
+      router.push("/user/delivery")
     }
 
     if(data?.isValid == -1 && data?.type === 'DELIVERY'){   
@@ -75,8 +142,8 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="max-w-xl w-full">
-      <form className="flex flex-col gap-4" onSubmit={onSubmit}>
+    <div className="max-w-xl w-full mx-auto">
+      <form className={!validData ? `flex flex-col gap-4 w-full items-center` : "hidden"} onSubmit={onSubmit}>
         <div>
           <h3 className="text-center text-black text-2xl font-medium leading-9">
             Inicia sesion para empezar 🍕
