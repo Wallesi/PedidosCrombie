@@ -126,7 +126,7 @@ export const FormAddTitleAndTypeLocal = ({ typeCrud }: { typeCrud: crudTypes}) =
         </button>
       </form>
 
-      { validData ? <FormAdress id={userId} type='LOCAL'/> : null}
+      { validData ? <FormAdress type='LOCAL' typeCrud={typeCrud}/> : null}
     </div>
   );
 };
