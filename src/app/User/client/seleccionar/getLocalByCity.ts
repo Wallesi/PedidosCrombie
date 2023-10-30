@@ -24,6 +24,8 @@ export const getLocalByCity = async ({ country, state, city }) => {
       headers,
     });
 
+    console.log(response.data);
+    
     return response.data;
   } catch (error) {
     console.error('Error while making the request:', error);

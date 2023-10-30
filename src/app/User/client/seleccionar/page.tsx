@@ -17,7 +17,10 @@ export default function () {
     const fetchData = async () => {
       try {
         const fetchedAddress = await getAddress();
-        const fetchedCity = await getLocalByCity(fetchedAddress.address)
+        const {country, state, city} = fetchedAddress.address
+        console.log(country, state, city);
+        
+        const fetchedCity = await getLocalByCity({country, state, city})
         console.log(fetchedCity);
         
       } catch (error: any) {
