@@ -45,7 +45,6 @@ export default function RegisterFormLocal() {
   const onSubmit = handleSubmit(async (information , e: any) => {
     e.preventDefault()
     information.tipoNegocio = negocioSeleccionado;
-    console.log(information );
   });
 
   return (

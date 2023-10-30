@@ -17,10 +17,11 @@ const schemaMenu = yup.object().shape({
   name: yup.string()
 });
 
-export default function FormMenu({id, counter} : {id:string, counter:any}) {
+export default function FormMenu({counter} : {counter:any}) {
 
 const cookies = parseCookies();
 const userId = cookies.userId;
+const token = cookies.token;
 
 
   const [menuType, setmenuType] = useState("SWEET");
@@ -55,13 +56,12 @@ const userId = cookies.userId;
   const onSubmit = handleSubmit(async (information, e: any) => {
     e.preventDefault();
     information.menuType = menuType;
-    information.photo = image;    
+    information.photo = image;      
     try {
-      const response = await fetch(`https://pedidos-crombie-production.up.railway.app/eatables/${id}`, {
+      const response = await fetch(`https://pedidos-crombie-production.up.railway.app/eatables/${userId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${userId}`
         },
         body: JSON.stringify(information),
       });

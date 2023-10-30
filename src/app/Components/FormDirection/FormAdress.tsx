@@ -8,6 +8,7 @@ import { Address } from "@/app/types/Address";
 import SelectInputProvincia from "./SelectInputProvincia";
 import SelectInputCiudades from "./SelectFormCiudades";
 import { parseCookies } from "nookies";
+import { useRouter } from "next/navigation";
 
 const schemaAddress = yup.object().shape({
   country: yup.string().default("Argentina"),
@@ -27,9 +28,14 @@ const schemaAddress = yup.object().shape({
   apartment: yup.string(),
 });
 
-export default function FormAdress({ id, type}: { id: string; type: string }) {
+type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
+
+export default function FormAdress({ type, typeCrud}: { type: string, typeCrud: crudTypes }) {
   const cookies = parseCookies();
   const userId = cookies.userId;
+  const token = cookies.token;
+  const router = useRouter()
+
   const [provincia, setProvincia] = useState({ provincia: "Misiones", id: 54 });
   const [ciudad, setCiudad] = useState("APOSTOLES");
   const [data, setData] = useState();
@@ -57,15 +63,15 @@ export default function FormAdress({ id, type}: { id: string; type: string }) {
     information.city = ciudad.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '').toUpperCase();
     information.country = "Argentina";
 
-    if (type === "CLIENT") {
+    if (type === "CLIENT" ) {
       try {
         const response = await fetch(
-          `https://pedidos-crombie-production.up.railway.app/clients/${id}/adress`,
+          `https://pedidos-crombie-production.up.railway.app/clients/${userId}/adress`,
           {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${userId}`
+              "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(information),
           }
@@ -80,14 +86,15 @@ export default function FormAdress({ id, type}: { id: string; type: string }) {
         console.error("Error en la solicitud fetch:", error);
       }
 
-    } else if (type === "LOCAL") {
+    } else if (type === "LOCAL" && typeCrud === "CREATE") {
       try {
         const response = await fetch(
-          `https://pedidos-crombie-production.up.railway.app/locals/${id}/adress`,
+          `https://pedidos-crombie-production.up.railway.app/locals/${userId}/address`,
           {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(information),
           }
@@ -95,6 +102,7 @@ export default function FormAdress({ id, type}: { id: string; type: string }) {
         if (response.ok) {
           const responseData = await response.json();
           setData(responseData);
+          router.push("/user/shop")
         } else {
           console.error("Error al enviar datos a la API:", response.statusText);
         }

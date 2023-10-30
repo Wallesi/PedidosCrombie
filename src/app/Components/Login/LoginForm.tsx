@@ -62,10 +62,9 @@ export default function LoginForm() {
   });
 
   const dataRecived = () => {
+    if(data){
 
-    if (data?.isValid == 1 && data?.type === 'CLIENT'){
-      const userId = data?.idRol
-      setCookie(null, 'userId', userId, {
+      setCookie(null, 'userId', data?.idRol, {
         maxAge: 60 * 60 * 24 * 7, 
         path: '/',
       });
@@ -75,70 +74,35 @@ export default function LoginForm() {
         path: '/',
       });
 
-      toast.success("has iniciado sesion correctamente")
-      router.push("/user/client/seleccionar")
-    }
-
-    if(data?.isValid == -1 && data?.type === 'CLIENT'){
-      return <FormAdress id={data?.idRol} type='CLIENT'/> 
-    }
-
-    if (data?.menuValidator == 1 && data?.type === 'LOCAL'){
-      const userId = data?.idRol
-      setCookie(null, 'userId', userId, {
+      setCookie(null, 'token', data?.token, {
         maxAge: 60 * 60 * 24 * 7, 
         path: '/',
       });
 
-      setCookie(null, 'rol', data?.type, {
-        maxAge: 60 * 60 * 24 * 7, 
-        path: '/',
-      });
-      
-      toast.success("has iniciado sesion correctamente")
-      router.push("/user/shop")
+      if (data?.isValid == 1 && data?.type === 'CLIENT'){
+        toast.success("has iniciado sesion correctamente")
+        router.push("/user/client")
+      }else if(data?.isValid == -1 && data?.type === 'CLIENT'){
+        return <FormAdress type='CLIENT'/> 
+      }
+  
+      if (data?.menuValidator == 1 && data?.type === 'LOCAL'){      
+        toast.success("has iniciado sesion correctamente")
+        router.push("/user/shop")
+      }else if(data?.isValid == -1 && data?.type === 'LOCAL'){   
+        return <FormAddTitleAndTypeLocal typeCrud='CREATE'/>
+      }else if(data?.menuValidator == -1 && data?.type === 'LOCAL'){   
+        return <FormMenuesRegisterLocal typeCrud='CREATE'/>
+      }
+  
+      if (data?.isValid == 1 && data?.type === 'DELIVERY'){
+        toast.success("has iniciado sesion correctamente")
+        router.push("/user/delivery")
+      }else if(data?.isValid == -1 && data?.type === 'DELIVERY'){   
+        return <FormVehicle typeCrud='CREATE'/> 
+      }
+      return null
     }
-
-    if(data?.isValid == -1 && data?.type === 'LOCAL'){   
-      const userId = data?.idRol
-      setCookie(null, 'userId', userId, {
-        maxAge: 60 * 60 * 24 * 7, 
-        path: '/',
-      });
-
-      const token = data?.token
-      setCookie(null, 'token', token, {
-        maxAge: 60 * 60 * 24 * 7, 
-        path: '/',
-      });
-
-      return <FormAddTitleAndTypeLocal typeCrud='CREATE'/>
-    }
-    
-    if(data?.menuValidator == -1 && data?.type === 'LOCAL'){   
-      const userId = data?.idRol
-      setCookie(null, 'userId', userId, {
-        maxAge: 60 * 60 * 24 * 7, 
-        path: '/',
-      });
-      return <FormMenuesRegisterLocal/>
-    }
-
-    if (data?.isValid == 1 && data?.type === 'DELIVERY'){
-      const userId = data?.idRol
-      setCookie(null, 'userId', userId, {
-        maxAge: 60 * 60 * 24 * 7, 
-        path: '/',
-      });
-      toast.success("has iniciado sesion correctamente")
-      router.push("/user/delivery")
-    }
-
-    if(data?.isValid == -1 && data?.type === 'DELIVERY'){   
-      return <FormVehicle id={data?.idRol}/> 
-    }
-
-    return null
   }
 
   return (

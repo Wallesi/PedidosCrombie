@@ -7,6 +7,9 @@ import { RegisterRepartidor } from './RegisterRepartidor/RegisterRepartidor';
 import { RegisterLocal } from "./RegisterLocal/RegisterLocal";
 import { User } from "@/app/types/User"
 import SelectInputUserType from "../SelectInputUserType/SelectInputUserType";
+import { toast } from "sonner";
+import router from "next/router";
+import { useRouter } from "next/navigation";
 
 
 const schema = yup
@@ -41,6 +44,7 @@ export default function RegisterForm() {
   const [rol, setRol] = useState("CLIENT");
   const [formValue, setFormValue] = useState(false);
   const [data, setData] = useState("CLIENT");
+  const router = useRouter()
 
   const {
     register,
@@ -54,19 +58,27 @@ export default function RegisterForm() {
     setRol(value);
   }
 
-  const onSubmit = handleSubmit((information, e) => {
+  const onSubmit = handleSubmit(async (information, e) => {
     e?.preventDefault();
     information.role = rol
     setFormValue(true)
     setData(rol)
     //enviar estos datos a la api para crear el objeto
-    fetch('https://pedidos-crombie-production.up.railway.app/auth/register', {
-      method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify(information)
-      })
+    try {
+      const response =  fetch('https://pedidos-crombie-production.up.railway.app/auth/register', {
+        method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(information)
+        })
+      if ((await response).ok) {
+        toast.success("te has registrado correctamente, ahora inicia sesion")
+        router.push("/login")
+      } 
+    } catch (error) {
+      console.log(error);
+    }
   })
 
   return (

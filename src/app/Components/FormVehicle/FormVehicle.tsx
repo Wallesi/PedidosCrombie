@@ -5,6 +5,10 @@ import * as yup from "yup";
 import { useState } from "react";
 import SelectformInputVehicle from "./SelectformInputVehicle";
 import { Vehicle } from "@/app/types/Vehicle";
+import { parseCookies } from "nookies";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
 
 const schemaVehicle = yup.object().shape({
     name: yup.string().required("Por favor ingresa el nombre de su vehículo"),
@@ -16,11 +20,18 @@ const schemaVehicle = yup.object().shape({
       .matches(/^\d{6}$/, "La patente debe contener exactamente 6 dígitos"),
   });
 
-export default function FormVehicle({id, token}:{id:string}) {
+  type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
+
+  const cookies = parseCookies();
+  const userId = cookies.userId;
+  const token = cookies.token;
+
+export default function FormVehicle({ typeCrud }: { typeCrud: crudTypes}) {
+  const router = useRouter()
   const [data, setData] = useState();
 
   const [vehiculoSeleccionado, setvehiculoSeleccionado] = useState({
-    vehiculo: "Moto",
+    vehiculo: "MOTO",
   });
 
   const {
@@ -39,7 +50,7 @@ export default function FormVehicle({id, token}:{id:string}) {
     information.type = vehiculoSeleccionado.vehiculo;
     try {
       const response = await fetch(
-        `https://pedidos-crombie-production.up.railway.app/vehicles/${id}`,
+        `https://pedidos-crombie-production.up.railway.app/vehicles/${userId}`,
         {
           method: "POST",
           headers: {
@@ -52,6 +63,12 @@ export default function FormVehicle({id, token}:{id:string}) {
       if (response.ok) {
         const responseData = await response.json();
         setData(responseData);
+        
+        if(typeCrud === 'CREATE'){
+          toast.success("has iniciado sesion correctamente")
+          router.push("/user/delivery")
+        }
+
       } else {
         console.error("Error al enviar datos a la API:", response.statusText);
       }

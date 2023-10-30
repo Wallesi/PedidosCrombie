@@ -3,11 +3,10 @@ import React, { useState } from 'react'
 import FormMenu from '../FormMenu/FormMenu'
 import { useRouter } from "next/navigation";
 import { toast } from 'sonner'
-import { parseCookies } from 'nookies';
 
-export const FormMenuesRegisterLocal = () => {
-  const cookies = parseCookies();
-  const userId = cookies.userId;
+type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
+
+export const FormMenuesRegisterLocal = ({ typeCrud }: { typeCrud: crudTypes}) => {
 
     const router = useRouter()
 
@@ -19,10 +18,10 @@ export const FormMenuesRegisterLocal = () => {
 
     const validatior = () => {
         if(receivedNumber < 3){
-            return <FormMenu id={userId} counter={handleCounter}/>
+            return <FormMenu counter={handleCounter}/>
         }else{
             toast.success("Registro exitoso")
-            router.push("/")
+            router.push("/user/shop")
         }
     }
 
