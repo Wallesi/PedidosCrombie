@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import FormMenu from '../FormMenu/FormMenu'
 import { useRouter } from "next/navigation";
 import { toast } from 'sonner'
+import { FormAddTitleAndTypeLocal } from '../FormAddTitleAndTypeLocal/FormAddTitleAndTypeLocal';
 
 type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
 
@@ -18,17 +19,16 @@ export const FormMenuesRegisterLocal = ({ typeCrud }: { typeCrud: crudTypes}) =>
 
     const validatior = () => {
         if(receivedNumber < 3){
+            receivedNumber != 0 ? toast.success(`has agregado 1 menu, faltan ${3 - receivedNumber}`) : null
             return <FormMenu counter={handleCounter}/>
         }else{
-            toast.success("Registro exitoso")
-            router.push("/user/shop")
+          return <FormAddTitleAndTypeLocal typeCrud='CREATE'/>
         }
     }
 
   return (
     <div className='w-full'>
-      <h3 className='text-center text-black text-2xl font-medium leading-9 mb-5'>Ingrese al menos 3 menues para continuar</h3>
-      <h3 className='text-center text-black text-xl font-medium leading-9'>menu numero {receivedNumber + 1}</h3>
+      <h3 className='text-center text-black text-2xl font-medium leading-9 mb-5'>ingrese algunos datos para continuar</h3>
         { validatior()}
     </div>
   )

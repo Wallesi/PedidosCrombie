@@ -1,7 +1,7 @@
 export default function () {
     return (
         <div className="container mx-auto max-w-screen-lg mt-10 pl-5 pr-5">
-            <h1 className="text-center text-2xl font-bold pb-5">Landing Usuario</h1>
+            <h1 className="text-center text-2xl font-bold pb-5">BIENVENIDO QUE DESEA DISFRUTAR HOY!</h1>
 
             <div className="grid grid-cols-3 grid-rows-3 gap-4 mb-0 ">
 
@@ -40,7 +40,7 @@ export default function () {
 
 
                 <div className="bg-yellow-500 mb-0 p-2 rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500 duration-300">
-                    <a href="user/client/seleccionar">
+                    <a href="/user/client/seleccionar">
                         <div className="flex flex-col items-center justify-center">
                             <img src="/UserLanding/iceCream.svg" className="w-1/2" alt="" />
                             <h3 className="text-base md:text-xl font-bold text-white">Helado</h3>

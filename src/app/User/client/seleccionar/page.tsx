@@ -2,14 +2,45 @@
 import { useEffect, useState } from "react";
 import { getAddress } from "./getAddres";
 import { getLocalByCity } from "./getLocalByCity";
-import { parseCookies } from "nookies";
+import { parseCookies, setCookie } from "nookies";
+import Link from "next/link";
+
+type Menu = {
+  idEatable: string;
+  title: string;
+  description: string;
+  photo: string;
+  price: number;
+  name: string;
+  menuType: string;
+};
+
+type Address = {
+  idAddress: string;
+  country: string;
+  state: string;
+  CP: string;
+  city: string;
+  street: string;
+  number: string;
+  apartment: string;
+};
+
+type Local = {
+  id: string;
+  localName: string;
+  description: string;
+  type: string;
+  menus: Menu[];
+  address: Address;
+};
 
 export default function () {
   const cookies = parseCookies();
   const userId = cookies.userId;
   const token = cookies.token;
 
-  const [address, setAddress] = useState();
+  const [validLocal, setValidLocal] = useState<Local[]>();
 
   const [nombreRestaurante, setNombreRestaurante] = useState("");
 
@@ -17,12 +48,9 @@ export default function () {
     const fetchData = async () => {
       try {
         const fetchedAddress = await getAddress();
-        const {country, state, city} = fetchedAddress.address
-        console.log(country, state, city);
-        
-        const fetchedCity = await getLocalByCity({country, state, city})
-        console.log(fetchedCity);
-        
+        const { country, state, city } = fetchedAddress.address;
+        const fetchedCity = await getLocalByCity({ country, state, city });
+        setValidLocal(fetchedCity);
       } catch (error: any) {
         console.error("Error al obtener la dirección:", error.message);
       }
@@ -35,12 +63,11 @@ export default function () {
     setNombreRestaurante(inputValue);
   };
 
-  const handleSearch = async () => {
-    
-  };
 
+  const handleSearch = async () => {};
 
   return (
+
     <div className="container mx-auto max-w-screen-lg pl-10 pr-10">
       <div className="flex justify-between items-center mt-5">
         <input
@@ -121,43 +148,41 @@ export default function () {
         </div>
       </div>
 
-      <div className="space-y-4 mt-5 mb-5">
-        <div className="flex items-center justify-between border border-black rounded-xl p-4">
-          <img
-            src="/UserLanding/restaurant.svg"
-            className="w-1/12 border rounded-full p-1"
-            alt=""
-          />
-          <div>
-            <h1>Nombre Restaurante</h1>
-            <p>Descuento 20%</p>
-            <p>15-20min - Envio $500</p>
+      <div className="space-y-4 mt-5 mb-5 ">
+        {!validLocal ? (
+          <div className="items-center mx-auto">
+            <p className="text-3xl text-red-500">No se han encontrado locales en tu zona</p>
           </div>
-          <div className="flex items-center justify-center gap-3">
-            <img src="/UserLanding/star.svg" className="w-8" alt="" />
-            <p className="text-lg">4</p>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between border border-black rounded-xl p-4">
-          <img
-            src="/UserLanding/restaurant.svg"
-            className="w-1/12 border rounded-full p-1"
-            alt=""
-          />
-          <div>
-            <h1>Nombre Restaurante</h1>
-            <p>Descuento 20%</p>
-            <p>15-20min - Envio $500</p>
-          </div>
-          <div className="flex items-center justify-center gap-3">
-            <img src="/UserLanding/star.svg" className="w-8" alt="" />
-            <p className="text-lg">4</p>
-          </div>
-        </div>
+        ) : (
+          <>
+            {validLocal.map((data) => (
+              <button>
+                <Link href={`/user/client/seleccionar/${data.id}`}>
+                  <div
+                    className="flex items-center justify-between border border-black rounded-xl p-4"
+                    key={data.id}
+                  >
+                    <img
+                      src="/UserLanding/restaurant.svg"
+                      className="w-1/12 border rounded-full p-1"
+                      alt=""
+                    />
+                    <div>
+                      <h1>{data.localName}</h1>
+                      <p>Descuento 20%</p>
+                      <p>15-20min - Envio $500</p>
+                    </div>
+                    <div className="flex items-center justify-center gap-3">
+                      <img src="/UserLanding/star.svg" className="w-8" alt="" />
+                      <p className="text-lg">4</p>
+                    </div>
+                  </div>
+                </Link>
+              </button>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
 }
-
-

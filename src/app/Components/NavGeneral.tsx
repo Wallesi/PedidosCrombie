@@ -1,25 +1,10 @@
 "use client"
 import Link from "next/link";
-import { parseCookies } from "nookies";
 import React from "react";
 import { useState } from "react";
-export const NavProfiles = () => {
-  
-  const cookies = parseCookies();
-  const [cooky, setCokky] = useState(cookies.rol)
-
-  if(cooky === 'LOCAL') {
-    setCokky('shop')
-  }
-  if(cooky === 'DELIVERY') {
-    setCokky('delivery')
-  }
-  if(cooky === 'CLIENT') {
-    setCokky('client')
-  }
 
 
-  
+export const NavGeneral = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -38,6 +23,7 @@ export const NavProfiles = () => {
             </label>
           </div>
 
+          
           <div className="flex-1 px-2 mx-2 text-xl text-white font-bold">
               <img className="w-12 mr-2" src="/Home/logo2.png" alt="" />
               <a href="/">Pedidos Crombie</a>
@@ -46,7 +32,8 @@ export const NavProfiles = () => {
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
-              <Link href={`/user/${cooky}`} className="btn btn-accent mr-4">menu</Link>
+              <Link href="/register" className="btn bg-red-700 mr-4 border-none">Register</Link >
+              <Link href="/login" className="btn btn-accent mr-4">Login</Link >
             </ul>
           </div>
         </div>
@@ -55,11 +42,12 @@ export const NavProfiles = () => {
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-black">
           {/* Sidebar content here */}
-          <button className="btn btn-neutral"><Link href={`/user/${cooky}`} className="btn btn-accent mr-4">menu</Link></button>
+          <Link href="/register" className="btn bg-red-700 mr-4 border-none">Register</Link >
+          <Link href="/login" className="btn btn-accent mr-4">Login</Link >
         </ul>
       </div>
     </div>
 
   );
 }
-export default NavProfiles;
+export default NavGeneral;

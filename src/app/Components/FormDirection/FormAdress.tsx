@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 const schemaAddress = yup.object().shape({
   country: yup.string().default("Argentina"),
-  state: yup.string().required().default("Misiones"),
+  state: yup.string().required().default("MISIONES"),
   city: yup.string().required().default("APOSTOLES"),
   CP: yup
     .string()
@@ -36,7 +36,7 @@ export default function FormAdress({ type, typeCrud}: { type: string, typeCrud: 
   const token = cookies.token;
   const router = useRouter()
 
-  const [provincia, setProvincia] = useState({ provincia: "Misiones", id: 54 });
+  const [provincia, setProvincia] = useState({ provincia: "MISIONES", id: 54 });
   const [ciudad, setCiudad] = useState("APOSTOLES");
   const [data, setData] = useState();
 
