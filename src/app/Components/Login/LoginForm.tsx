@@ -86,12 +86,10 @@ export default function LoginForm() {
         return <FormAdress type='CLIENT'/> 
       }
   
-      if (data?.menuValidator == 1 && data?.type === 'LOCAL'){      
+      if (data?.menuValidator == 1 && data?.isValid == 1 && data?.type === 'LOCAL'){      
         toast.success("has iniciado sesion correctamente")
         router.push("/user/shop")
-      }else if(data?.isValid == -1 && data?.type === 'LOCAL'){   
-        return <FormAddTitleAndTypeLocal typeCrud='CREATE'/>
-      }else if(data?.menuValidator == -1 && data?.type === 'LOCAL'){   
+      }else if((data?.menuValidator == -1 || data?.isValid == -1 ) && data?.type === 'LOCAL'){   
         return <FormMenuesRegisterLocal typeCrud='CREATE'/>
       }
   

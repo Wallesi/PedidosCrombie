@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
-export const NavBar = () => {
+export const NavClient = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -30,12 +30,10 @@ export const NavBar = () => {
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">
               {/* Navbar menu content here */}
-              <a href="/shopCart" className="btn bg-red-700 mr-4 border-none">
+              <Link href="/user/client/shopcart" className="btn bg-red-700 mr-4 border-none">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAT1JREFUSEvN1CEsRlEYxvHfNyMQbaaZTBNIkiJogsJIhqIwySbaREwwQzFBExRBMoJEUBTFRjCbYAI7du929+377j1cn3nLDec57/8853nPrWhwVRrc358CPhI3r9jG/G+4yzpIAWnfIZyWhdS6okWs4hgjjQC04wFN6MJ9GUi9kPcxXqLxIcbC/nqAAZyXANygNw8Q1q7Rg0nsRcKCbgJLSY6572AaW7hEfwSgDU9oQSceixy0JqLw7cNVAWQKOzjBcKotesnrmMMuQoO8OsNgEm4I+auKACGDkMUbOvBSh9CNOzwnuvdYQNClJ1vAWh3ACpaTzGaymiIHQRvm+SAi5CAJ433xXUAzbhGuIa+OMFotiHEQefjasljABmaxmUxVtlveWuEUpY2yv/LqQ+WtRQMa7uDHOcRm8H8Bn2QFNRlXu2umAAAAAElFTkSuQmCC"/>
-              </a>
-              <a href="/perfil" className="btn btn-accent mr-4">Perfil</a>
-              <Link href="/register"><button className="btn btn-neutral mr-4">Register</button></Link>
-              <Link href="/login"><button className="btn btn-accent">Login</button></Link>
+              </Link >
+              <Link href="/user/client/perfil" className="btn btn-accent mr-4">Perfil</Link >
             </ul>
           </div>
         </div>
@@ -44,12 +42,14 @@ export const NavBar = () => {
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-black">
           {/* Sidebar content here */}
-          <button className="btn btn-neutral">Register</button>
-          <button className="btn btn-accent mt-5">Login</button>
+          <button className="btn btn-neutral"><Link href="/perfil" className="btn btn-accent mr-4">Perfil</Link ></button>
+          <button className="btn btn-accent mt-5"> <Link href="/shopCart" className="btn bg-red-700 mr-4 border-none">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAT1JREFUSEvN1CEsRlEYxvHfNyMQbaaZTBNIkiJogsJIhqIwySbaREwwQzFBExRBMoJEUBTFRjCbYAI7du929+377j1cn3nLDec57/8853nPrWhwVRrc358CPhI3r9jG/G+4yzpIAWnfIZyWhdS6okWs4hgjjQC04wFN6MJ9GUi9kPcxXqLxIcbC/nqAAZyXANygNw8Q1q7Rg0nsRcKCbgJLSY6572AaW7hEfwSgDU9oQSceixy0JqLw7cNVAWQKOzjBcKotesnrmMMuQoO8OsNgEm4I+auKACGDkMUbOvBSh9CNOzwnuvdYQNClJ1vAWh3ACpaTzGaymiIHQRvm+SAi5CAJ433xXUAzbhGuIa+OMFotiHEQefjasljABmaxmUxVtlveWuEUpY2yv/LqQ+WtRQMa7uDHOcRm8H8Bn2QFNRlXu2umAAAAAElFTkSuQmCC"/>
+              </Link ></button>
         </ul>
       </div>
     </div>
 
   );
 }
-export default NavBar;
+export default NavClient;
