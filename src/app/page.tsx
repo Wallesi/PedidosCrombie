@@ -1,12 +1,14 @@
 import Link from "next/link";
 import NavBar from "./Components/NavClient";
 import NavGeneral from "./Components/NavGeneral";
+import ButtonStage from "./Components/ButtonStage";
 
 export default function Home() {
 
   return (
     <div className="da">
         <NavGeneral/>
+        <ButtonStage></ButtonStage>
             <div className="hero min-h-screen z-10" style={{ backgroundImage: 'url(/Home/Portada.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
