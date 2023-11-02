@@ -9,6 +9,7 @@ import SelectInputProvincia from "./SelectInputProvincia";
 import SelectInputCiudades from "./SelectFormCiudades";
 import { parseCookies } from "nookies";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const schemaAddress = yup.object().shape({
   country: yup.string().default("Argentina"),
@@ -63,7 +64,7 @@ export default function FormAdress({ type, typeCrud}: { type: string, typeCrud: 
     information.city = ciudad.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '').toUpperCase();
     information.country = "Argentina";
 
-    if (type === "CLIENT" ) {
+    if (type === "CLIENT" && typeCrud === 'CREATE') {
       try {
         const response = await fetch(
           `https://pedidos-crombie-production.up.railway.app/clients/${userId}/adress`,
@@ -79,6 +80,8 @@ export default function FormAdress({ type, typeCrud}: { type: string, typeCrud: 
         if (response.ok) {
           const responseData = await response.json();
           setData(responseData);
+          toast.success("Cuenta creada con exito")
+          router.push("/user/client")
         } else {
           console.error("Error al enviar datos a la API:", response.statusText);
         }
@@ -102,6 +105,7 @@ export default function FormAdress({ type, typeCrud}: { type: string, typeCrud: 
         if (response.ok) {
           const responseData = await response.json();
           setData(responseData);
+          toast.success("Cuenta creada con exito")
           router.push("/user/shop")
         } else {
           console.error("Error al enviar datos a la API:", response.statusText);

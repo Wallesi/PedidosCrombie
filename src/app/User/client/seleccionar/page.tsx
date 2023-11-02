@@ -4,6 +4,7 @@ import { getAddress } from "./getAddres";
 import { getLocalByCity } from "./getLocalByCity";
 import { parseCookies, setCookie } from "nookies";
 import Link from "next/link";
+import { array } from "yup";
 
 type Menu = {
   idEatable: string;
@@ -42,7 +43,11 @@ export default function () {
 
   const [validLocal, setValidLocal] = useState<Local[]>();
 
-  const [nombreRestaurante, setNombreRestaurante] = useState("");
+  const [validMenu, setValidMenu] = useState<Local[]>();
+
+  const [filtredData, setFiltredData] = useState<Local[]>();
+
+  const [busqueda, setBusqueda] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,12 +64,49 @@ export default function () {
   }, []);
 
   const handleInputChange = (e) => {
-    const inputValue = e.target.value;
-    setNombreRestaurante(inputValue);
+    const bsq = e.target.value
+    setBusqueda(bsq);
+    handleSearch()
+    nameMenuSelected()
   };
 
+  const handleSearch = async () => {
 
-  const handleSearch = async () => {};
+    const element = validLocal?.filter( (parametros) => {
+      if(parametros.localName.toLowerCase().includes(busqueda.toLowerCase())){        
+        return parametros
+      }
+    })
+    setFiltredData(element); 
+  };
+
+  const nameMenuSelected = () =>{
+
+    const arr: Local[] = []
+
+    const element = validLocal?.filter( (parametros) => {
+      parametros.menus.forEach(element => {    
+        if(element.name.toLowerCase().includes(busqueda.toLowerCase())){       
+          arr.push(parametros)
+        }
+      });
+    }) 
+
+    const filteredData = arr.filter((item, index, self) => {
+      const lowerCaseName = item.localName.toLowerCase();
+      // Comparamos en minúsculas
+      return self.findIndex((i) => i.localName.toLowerCase() === lowerCaseName) === index;
+    });
+
+    setValidMenu(filteredData); 
+  }
+
+  const saveDataLocal = (data) => {
+    setCookie(null, 'localName', data.localName , {
+      maxAge: 60 * 60 * 24 * 7, 
+      path: '/',
+    });
+  }
 
   return (
 
@@ -73,21 +115,17 @@ export default function () {
         <input
           type="text"
           placeholder="Nombre del restaurante"
-          className="input input-bordered w-1/2"
-          value={nombreRestaurante} //
+          className="input input-bordered w-full"
           onChange={handleInputChange}
         />
-        <button className="btn btn-primary" onClick={handleSearch}>
-          Buscar
-        </button>
       </div>
 
       <div className="grid grid-cols-3  md:grid-cols-6 gap-4 pt-5">
         <div className="md:col-span-1 bg-orange-400 rounded-xl p-2 hover:bg-indigo-500 duration-300">
-          <button>
+          <button >
             <div className="flex flex-col items-center justify-center">
               <img src="/UserLanding/burguer.svg" className="w-1/2" alt="" />
-              <h3 className="text-base font-bold text-white">Resturante</h3>
+              <h3 className="text-base font-bold text-white">Hamburguesa</h3>
             </div>
           </button>
         </div>
@@ -97,21 +135,21 @@ export default function () {
             <div className="flex flex-col items-center justify-center">
               <img src="/UserLanding/groceries.svg" className="w-1/2" alt="" />
               <h3 className="text-base md:text-xl font-bold text-white">
-                Mercado
+                Pizza
               </h3>
             </div>
           </a>
         </div>
 
         <div className="md:col-span-1 bg-yellow-500 mb-0 p-2 rounded-md hover:bg-indigo-500 duration-300">
-          <a href="/User/seleccionar/shoplanding">
+        <button>
             <div className="flex flex-col items-center justify-center">
               <img src="/UserLanding/iceCream.svg" className="w-1/2" alt="" />
               <h3 className="text-base md:text-xl font-bold text-white">
                 Helado
               </h3>
             </div>
-          </a>
+          </button >
         </div>
 
         <div className="md:col-span-1 bg-green-500 mb-0 p-2 rounded-md hover:bg-indigo-500 duration-300">
@@ -119,7 +157,7 @@ export default function () {
             <div className="flex flex-col items-center justify-center h-full">
               <img src="/UserLanding/drinks.svg" className="w-1/2" alt="" />
               <h3 className="text-base md:text-xl font-bold text-white">
-                Bebidas
+                Bebida
               </h3>
             </div>
           </a>
@@ -130,7 +168,7 @@ export default function () {
             <div className="flex flex-col items-center  justify-center">
               <img src="/UserLanding/bakery.svg" className="w-1/2" alt="" />
               <h3 className="text-base md:text-xl font-bold text-white">
-                Panaderia
+                Empanada
               </h3>
             </div>
           </a>
@@ -141,7 +179,7 @@ export default function () {
             <div className="flex flex-col items-center justify-center">
               <img src="/UserLanding/pharmacy.svg" className="w-1/2" alt="" />
               <h3 className="text-base md:text-xl font-bold text-white">
-                Farmacia
+                Todo
               </h3>
             </div>
           </a>
@@ -155,8 +193,10 @@ export default function () {
           </div>
         ) : (
           <>
-            {validLocal.map((data) => (
-              <button>
+          <h3 className="text-xl">Locales disponibles en tu ciudad</h3>
+            {busqueda === "" ? 
+            validLocal.map((data) => (
+              <button onClick={() => saveDataLocal(data)}>
                 <Link href={`/user/client/seleccionar/${data.id}`}>
                   <div
                     className="flex items-center justify-between border border-black rounded-xl p-4"
@@ -168,7 +208,7 @@ export default function () {
                       alt=""
                     />
                     <div>
-                      <h1>{data.localName}</h1>
+                      <h1 className="text-xl text-green-300">{data.localName}</h1>
                       <p>Descuento 20%</p>
                       <p>15-20min - Envio $500</p>
                     </div>
@@ -179,10 +219,65 @@ export default function () {
                   </div>
                 </Link>
               </button>
-            ))}
+            ))
+          :
+          filtredData?.map((data) => (
+            <button onClick={() => saveDataLocal(data)}>  
+              <Link href={`/user/client/seleccionar/${data.id}`}>
+                <div
+                  className="flex items-center justify-between border border-black rounded-xl p-4"
+                  key={data.id}
+                >
+                  <img
+                    src="/UserLanding/restaurant.svg"
+                    className="w-1/12 border rounded-full p-1"
+                    alt=""
+                  />
+                  <div>
+                    <h1>{data.localName}</h1>
+                    <p>Descuento 20%</p>
+                    <p>15-20min - Envio $500</p>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <img src="/UserLanding/star.svg" className="w-8" alt="" />
+                    <p className="text-lg">4</p>
+                  </div>
+                </div>
+              </Link>
+            </button>
+          ))}
           </>
         )}
       </div>
+      <h3 className="text-xl">Locales que poseen la comida que buscas</h3>
+      {validMenu ? 
+       validMenu.map((data) => (
+        <button onClick={() => saveDataLocal(data)}>  
+          <Link href={`/user/client/seleccionar/${data.id}`}>
+            <div
+              className="flex items-center justify-between border border-black rounded-xl p-4"
+              key={data.id}
+            >
+              <img
+                src="/UserLanding/restaurant.svg"
+                className="w-1/12 border rounded-full p-1"
+                alt=""
+              />
+              <div>
+                <h1>{data.localName}</h1>
+                <p>Descuento 20%</p>
+                <p>15-20min - Envio $500</p>
+              </div>
+              <div className="flex items-center justify-center gap-3">
+                <img src="/UserLanding/star.svg" className="w-8" alt="" />
+                <p className="text-lg">4</p>
+              </div>
+            </div>
+          </Link>
+        </button>
+      ))
+      : <div className="text-red-400">no se ha encontrado ese menu en ningun local por tu zona</div>
+    }
     </div>
   );
 }

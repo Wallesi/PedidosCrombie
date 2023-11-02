@@ -7,6 +7,8 @@ import React, { useState } from "react";
 import RegisterSelectInputLocalCategory from "../SelectInputLocalCategory/RegisterSelectInputLocalCategory";
 import FormAdress from "../FormDirection/FormAdress";
 import { parseCookies } from "nookies";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 
 type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
@@ -33,6 +35,7 @@ export const FormAddTitleAndTypeLocal = ({ typeCrud }: { typeCrud: crudTypes}) =
   const cookies = parseCookies();
   const userId = cookies.userId;
   const token = cookies.token;
+  const router = useRouter()
 
   const [typeLocal, setTypeLocal] = useState<string>("RESTAURANT");
   const [validData, setValidData] = useState<boolean>(false)
@@ -68,6 +71,17 @@ export const FormAddTitleAndTypeLocal = ({ typeCrud }: { typeCrud: crudTypes}) =
         console.error("Error en la solicitud fetch:", error);
       }
   });
+
+  const verification = () => {
+    if (typeCrud==='CREATE') {
+      toast.success("Esos datos son correctos")
+      return <FormAdress type='LOCAL' typeCrud={typeCrud}/>
+    }
+    if (typeCrud==='UPDATE') {
+      toast.success("Datos editados correctamente")
+      router.push("/user/shop")
+    }
+  }
 
   return (
     <div className="max-w-xl w-full bg-base-100">
@@ -126,7 +140,8 @@ export const FormAddTitleAndTypeLocal = ({ typeCrud }: { typeCrud: crudTypes}) =
         </button>
       </form>
 
-      { validData ? <FormAdress type='LOCAL' typeCrud={typeCrud}/> : null}
+      { validData ? verification() : null }
     </div>
   );
 };
+

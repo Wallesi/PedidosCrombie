@@ -5,8 +5,7 @@ import { FormAddTitleAndTypeLocal } from '@/app/Components/FormAddTitleAndTypeLo
 const page = () => {
 
   return (
-    <div>
-      <h2>Editar datos</h2>
+    <div className='flex mx-auto justify-center align-middle items-center'>
       <FormAddTitleAndTypeLocal typeCrud='UPDATE'/>
     </div>
   )

@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getEatablesById } from "./getEatablesById";
+import { parseCookies } from "nookies";
 
 type Eatable = {
     idEatable: string;
@@ -14,7 +15,10 @@ type Eatable = {
     menuType: string;
   };
 
-export default function ({ nombreRestaurante }: { nombreRestaurante: string }) {
+export default function () {
+
+  const cookies = parseCookies();
+  const nombreRestaurante = cookies.localName;
   const id = useParams().id;
   const [eatables, setEatables] = useState<Eatable[]>();
 
