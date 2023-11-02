@@ -26,7 +26,7 @@ const Page = () => {
   }, [receivedNumber]);
 
   return (
-    <div className='flex justify-center align-middle'>
+    <div className='flex justify-center align-middle mt-28'>
       <FormMenu typeCrud='CREATE' counter={handleCounter} />
     </div>
   )

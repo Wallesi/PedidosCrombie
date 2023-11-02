@@ -14,7 +14,7 @@ setCookie(null, 'menuId', id.toString(), {
 });
 
   return (
-    <div className='flex flex-col justify-center align-middle items-center'>
+    <div className='flex flex-col justify-center align-middle items-center mt-28'>
         <h3 className='text-xl mb-10'>Selecciona un menu para editar</h3>
         <FormMenu typeCrud='UPDATE'/>
     </div>

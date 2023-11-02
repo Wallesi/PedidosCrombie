@@ -2,8 +2,8 @@ export const Footer = () => {
     return (
         <footer className="footer p-10 bg-primary text-neutral-content flex justify-between">
             <aside>
-                <img className="w-24" src="Home/logo2.png" alt="" />
-                <p>Pedidos Crombie Ltd.<br />Providing reliable tech since 1992</p>
+                <img className="w-24" src="/Home/PedidosCrombieLogo.png" alt="" />
+                <p>Pedidos Crombie Ltd.<br />Providing reliable food since 2023</p>
             </aside>
             <nav>
                 <header className="footer-title">Social</header>

@@ -3,8 +3,8 @@ import React from "react";
 
 export default function () {
   return (
-    <div>
-      <div className="container mx-auto max-w-screen-lg pl-20 pr-20">
+    <div className="mt-28">
+      <div className="container mx-auto max-w-screen-lg pl-20 pr-20 ">
         <h1 className="text-center text-2xl font-bold pt-10">
           Panel de administracion de menues
         </h1>

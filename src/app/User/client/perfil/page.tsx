@@ -1,6 +1,6 @@
 export default function(){
     return(
-        <div className="container mx-auto max-w-screen-lg pl-20 pr-20">
+        <div className="container mx-auto max-w-screen-lg pl-20 pr-20 m-28">
 
             <h1 className="text-center text-2xl font-bold pt-10">Bienvenido! "Nombre Usuario"</h1>
 

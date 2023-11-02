@@ -35,7 +35,7 @@ export default function () {
   }, []);
 
   return (
-    <div className="container mx-auto max-w-screen-lg pl-10 pr-10">
+    <div className="container mx-auto max-w-screen-lg pl-10 pr-10 m-28">
       <div className="border rounded-lg shadow-md">
         <div
           className="hero h-40 bg-base-200"

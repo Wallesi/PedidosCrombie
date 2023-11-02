@@ -1,6 +1,6 @@
 export default function () {
     return (
-        <div className="container mx-auto max-w-screen-lg pl-10 pr-10">
+        <div className="container mx-auto max-w-screen-lg pl-10 pr-10 m-28">
             <div className="space-y-4 mt-5 mb-5">
 
                 <div className="flex items-center justify-between border border-black rounded-xl p-4">
