@@ -7,6 +7,8 @@ import { useRef, useState } from "react";
 import { Eatable } from "@/app/types/Eatable";
 import { uploadFile } from "@/app/firebase/config";
 import { parseCookies } from 'nookies';
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const schemaMenu = yup.object().shape({
   title: yup.string().required("Ingrese un nombre para su menu"),
@@ -17,11 +19,16 @@ const schemaMenu = yup.object().shape({
   name: yup.string()
 });
 
-export default function FormMenu({counter} : {counter:any}) {
+type typeCrud = "CREATE" | "UPDATE" | "DELETE"
+
+export default function FormMenu({counter, typeCrud} : {counter:any,  typeCrud: typeCrud}) {
+
+  const router = useRouter()
 
 const cookies = parseCookies();
 const userId = cookies.userId;
 const token = cookies.token;
+const menuId = cookies.menuId;
 
 
   const [menuType, setmenuType] = useState("SWEET");
@@ -57,30 +64,48 @@ const token = cookies.token;
     e.preventDefault();
     information.menuType = menuType;
     information.photo = image;      
-    try {
-      const response = await fetch(`https://pedidos-crombie-production.up.railway.app/eatables/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(information),
-      });
-      if (response.ok) {
-        if (typeof counter === 'function') {
-          counter(1);
-        }
-      } 
-    } catch (error) {
-      console.error("Error en la solicitud fetch:", error);
+    if(typeCrud === "CREATE"){
+      try {
+        const response = await fetch(`https://pedidos-crombie-production.up.railway.app/eatables/${userId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(information),
+        });
+        if (response.ok) {
+          if (typeof counter === 'function') {
+            counter(1);
+          }
+        } 
+      } catch (error) {
+        console.error("Error en la solicitud fetch:", error);
+      }
+    }else if(typeCrud === "UPDATE"){
+      try {
+        const response = await fetch(`https://pedidos-crombie-production.up.railway.app/eatables/${menuId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(information),
+        });
+        if (response.ok) {
+          toast.success("Menu actualizado con exito")
+          router.push("/user/shop/menumanagement")
+        } 
+      } catch (error) {
+        console.error("Error en la solicitud fetch:", error);
+      }
     }
   });
 
 
 
   return (
-    <div className="w-full max-w-2xl items-center justify-center align-middle">
-      <form className="flex flex-col items-center gap-4" onSubmit={onSubmit}>
-        <div className="block mb-5 w-full">
+    <div className="w-max max-w-2xl items-center justify-center align-middle">
+      <form className="flex flex-col items-center" onSubmit={onSubmit}>
+        <div className="block mb-3 w-full">
           <label className="font-medium">Nombre del menu</label>
           <input
             type="text"
@@ -96,7 +121,7 @@ const token = cookies.token;
           )}
         </div>
 
-        <div className="block mb-5 w-full">
+        <div className="block mb-3 w-full">
           <label className="font-medium">Nombre del alimento</label>
           <input
             type="text"

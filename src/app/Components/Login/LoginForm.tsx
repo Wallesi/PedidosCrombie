@@ -7,7 +7,6 @@ import { useState } from "react";
 import FormAdress from "../FormDirection/FormAdress";
 import FormVehicle from "../FormVehicle/FormVehicle";
 import { useRouter } from "next/navigation";
-import { FormAddTitleAndTypeLocal } from "../FormAddTitleAndTypeLocal/FormAddTitleAndTypeLocal";
 import { Toaster, toast } from 'sonner';
 import { FormMenuesRegisterLocal } from "../FormMenuesRegisterLocal/FormMenuesRegisterLocal";
 
@@ -55,9 +54,12 @@ export default function LoginForm() {
       if (response.ok) {
         setData(await response.json());
         setValidData(true);
-      } 
+      } else {
+        toast.error("Ese correo o contraseña es incorrecto");
+      }
     } catch (error) {
-      console.error("Error en la solicitud fetch:", error);
+      console.log(error);
+      
     }
   });
 
@@ -65,11 +67,6 @@ export default function LoginForm() {
     if(data){
 
       setCookie(null, 'userId', data?.idRol, {
-        maxAge: 60 * 60 * 24 * 7, 
-        path: '/',
-      });
-
-      setCookie(null, 'rol', data?.type, {
         maxAge: 60 * 60 * 24 * 7, 
         path: '/',
       });
@@ -83,7 +80,7 @@ export default function LoginForm() {
         toast.success("has iniciado sesion correctamente")
         router.push("/user/client")
       }else if(data?.isValid == -1 && data?.type === 'CLIENT'){
-        return <FormAdress type='CLIENT'/> 
+        return <FormAdress type='CLIENT' typeCrud='CREATE'/> 
       }
   
       if (data?.menuValidator == 1 && data?.isValid == 1 && data?.type === 'LOCAL'){      
