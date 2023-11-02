@@ -45,7 +45,7 @@ const Page = () => {
 
 
   return (
-    <div className="flex flex-col justify-center items-center align-middle">
+    <div className="flex flex-col justify-center items-center align-middle mt-28">
       <h3 className="text-2xl mt-20">Menues disponibles</h3>
       {menusValidData.length > 0 ? (
         menusValidData.map((data) => (

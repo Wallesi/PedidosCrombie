@@ -103,7 +103,7 @@ const menuId = cookies.menuId;
 
 
   return (
-    <div className="w-max max-w-2xl items-center justify-center align-middle">
+    <div className="w-max mx-auto max-w-2xl items-center justify-center align-middle">
       <form className="flex flex-col items-center" onSubmit={onSubmit}>
         <div className="block mb-3 w-full">
           <label className="font-medium">Nombre del menu</label>

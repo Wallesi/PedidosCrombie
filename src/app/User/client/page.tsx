@@ -1,6 +1,6 @@
 export default function () {
     return (
-        <div className="container mx-auto max-w-screen-lg mt-10 pl-5 pr-5">
+        <div className="container mx-auto max-w-screen-lg pl-5 pr-5 m-28">
             <h1 className="text-center text-2xl font-bold pb-5">BIENVENIDO QUE DESEA DISFRUTAR HOY!</h1>
 
             <div className="grid grid-cols-3 grid-rows-3 gap-4 mb-0 ">

@@ -89,12 +89,6 @@ export const FormAddTitleAndTypeLocal = ({ typeCrud }: { typeCrud: crudTypes}) =
         className={!validData ? `flex flex-col gap-4 w-full items-center` : "hidden"}
         onSubmit={onSubmit}
       >
-        <div>
-          <h3 className="text-center text-black text-2xl font-medium leading-9">
-            Ingresa algunos datos para continuar 🍕
-          </h3>
-        </div>
-
         <div className="w-full">
           <div className="block">
             <label htmlFor="">Ingrese el nombre de su local</label>

@@ -5,7 +5,7 @@ import FormMenu from '../Components/FormMenu/FormMenu'
 //COMPONENTE PRINCIPAL DE REGISTRO
 export const RegisterPage = () => {
   return (
-    <div>
+    <div className='mt-20'>
         <Register/>
     </div>
   )
