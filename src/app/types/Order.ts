@@ -9,5 +9,5 @@ export type Order = {
     delivery: Delivery,
     status: 'WAITING' | 'ONPREP' | 'PREP' | 'ONITSWAY' | 'RECEIVED' | 'CANCELLED',
     date: Date,
-    payment: Payment
+    payment: Payment,
 }
