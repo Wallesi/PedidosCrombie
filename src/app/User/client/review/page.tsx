@@ -25,7 +25,8 @@ export default function () {
                         <textarea className="textarea textarea-bordered h-24" placeholder="You review"></textarea>
                     </div>
                 </div>
-
+                
+                
                 <div className="flex items-center justify-end pt-10 space-x-4">
                     <button className="btn btn-active bg-red-500">Cancelar</button>
                     <button className="btn btn-active bg-green-400">Enviar</button>
