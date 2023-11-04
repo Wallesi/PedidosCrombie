@@ -187,7 +187,7 @@ export default function () {
             </div>
           </div>
         </div>
-        <div className="col-span-1">
+        <div className="md:col-span-1 ms:col-span-3">
           <div className="flex-col items-center justify-center border border-gray-200 rounded-lg p-4 shadow-2xl">
             <h3 className="text-center pb-2 text-2xl font-medium">Carrito</h3>
             {addedEatables.length === 0 ? (
