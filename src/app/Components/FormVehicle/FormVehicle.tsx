@@ -48,6 +48,7 @@ export default function FormVehicle({ typeCrud }: { typeCrud: crudTypes}) {
 
   const onSubmit = handleSubmit(async (information) => {
     information.type = vehiculoSeleccionado.vehiculo;
+    
     try {
       const response = await fetch(
         `https://pedidos-crombie-production.up.railway.app/vehicles/${userId}`,
@@ -63,6 +64,8 @@ export default function FormVehicle({ typeCrud }: { typeCrud: crudTypes}) {
       if (response.ok) {
         const responseData = await response.json();
         setData(responseData);
+        
+        
         
         if(typeCrud === 'CREATE'){
           toast.success("has iniciado sesion correctamente")

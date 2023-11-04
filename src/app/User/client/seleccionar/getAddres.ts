@@ -12,8 +12,15 @@ export const getAddress = async () => {
       throw new Error("userId no está definido");
     }
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     const response = await axios.get(
-      `https://pedidos-crombie-production.up.railway.app/clients/${userId}`
+      `https://pedidos-crombie-production.up.railway.app/clients/${userId}`,
+      config
     );
 
     if (response.status === 200) {
