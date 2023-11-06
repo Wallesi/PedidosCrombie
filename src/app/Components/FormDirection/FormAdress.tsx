@@ -50,7 +50,6 @@ export default function FormAdress({ type, typeCrud}: { type: string, typeCrud: 
   });
 
   function handleSelectChangeProvincia(value: any) {
-
     setProvincia(value);
   }
 

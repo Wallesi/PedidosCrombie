@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <div className="">
       <NavGeneral />
-      <ButtonStage></ButtonStage>
       <div className="hero min-h-screen z-0 relative">
         <div
           className="absolute inset-0 w-full h-full"
@@ -21,7 +20,7 @@ export default function Home() {
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
             <div className="flex justify-between">
-            <h1 className="mb-5 text-[2.25rem] sm:text-[3.45rem] font-bold w-max"><div className="bg-primary inline h-20 w-max"><span>Pedidos</span></div>Crombie</h1>
+            <h1 className="mb-5 text-[2.5rem] sm:text-[2.9rem] font-bold w-max"><div className="bg-primary inline h-20 w-max"><span>Pedidos</span></div>Crombie🍕</h1>
             </div>
              <p className="mb-5 sm:text-xl text-justify text-white drop-shadow-xl">
              <b> Pedidos crombie es la aplicación definitiva para satisfacer tus

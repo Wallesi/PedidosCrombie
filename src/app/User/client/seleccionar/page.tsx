@@ -187,11 +187,11 @@ export default function () {
       <div className="space-y-4 mt-5 mb-5 ">
         {!validLocal ? (
           <div className="items-center mx-auto">
-            <p className="text-3xl text-red-500 font-bold">No se han encontrado locales en tu zona</p>
+            <p className="text-3xl text-red-500 font-bold text-center m-10">No se han encontrado locales en tu zona</p>
           </div>
         ) : (
           <>
-          <h3 className="text-2xl font-bold">Locales disponibles en tu ciudad</h3>
+          <h3 className="text-2xl  m-10 font-ligth text-center">Locales disponibles en tu ciudad</h3>
             {busqueda === "" ? 
             validLocal.map((data) => (
               <button onClick={() => saveDataLocal(data)}>
@@ -208,7 +208,7 @@ export default function () {
                     <div>
                       <h1 className="text-xl font-semibold">{data.localName}</h1>
                       <p>Descuento 20%</p>
-                      <p>15-20min - Envio $500</p>
+                      <p>15-20min - Envio <b>GRATIS</b></p>
                     </div>
                     <div className="flex items-center justify-center gap-3">
                       <img src="/UserLanding/star.svg" className="w-8" alt="" />
@@ -234,7 +234,7 @@ export default function () {
                   <div>
                     <h1>{data.localName}</h1>
                     <p>Descuento 20%</p>
-                    <p>15-20min - Envio $500</p>
+                    <p>15-20min - Envio <b>GRATIS</b></p>
                   </div>
                   <div className="flex items-center justify-center gap-3">
                     <img src="/UserLanding/star.svg" className="w-8" alt="" />
@@ -247,7 +247,7 @@ export default function () {
           </>
         )}
       </div>
-      <h3 className="text-2xl font-bold">Locales que poseen la comida que buscas</h3>
+      <h3 className="text-2xl font-light text-center m-10">Locales que poseen la comida que buscas</h3>
       {validMenu ? 
        validMenu.map((data) => (
         <button onClick={() => saveDataLocal(data)}>  
@@ -264,7 +264,7 @@ export default function () {
               <div>
                 <h1>{data.localName}</h1>
                 <p>Descuento 20%</p>
-                <p>15-20min - Envio $500</p>
+                <p>15-20min - Envio <b>GRATIS</b></p>
               </div>
               <div className="flex items-center justify-center gap-3">
                 <img src="/UserLanding/star.svg" className="w-8" alt="" />
@@ -274,7 +274,7 @@ export default function () {
           </Link>
         </button>
       ))
-      : <div className="text-red-400 text-xl font-bold">no se ha encontrado ese menu en ningun local por tu zona</div>
+      : <div className="text-red-400 text-xl font-bold text-center">no se ha encontrado ese menu en ningun local por tu zona</div>
     }
     </div>
   );

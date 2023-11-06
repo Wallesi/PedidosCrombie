@@ -2,7 +2,7 @@ export default function(){
     return(
         <div className="container mx-auto max-w-screen-lg pl-20 pr-20 m-28">
 
-            <h1 className="text-center text-2xl font-bold pt-10">Bienvenido! "Nombre Usuario"</h1>
+<h1 className="text-center text-2xl font-light pt-10">Configuracion</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 pb-10">
 

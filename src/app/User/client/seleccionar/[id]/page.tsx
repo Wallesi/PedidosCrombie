@@ -1,11 +1,15 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getEatablesById } from "./getEatablesById";
 import { parseCookies } from "nookies";
 import { postOrder } from "./postOrder";
 import { patchOrder } from "./patchOrder";
+import { updateOrderStatus } from "./updateOrderStatus";
+import { toast } from "sonner";
+import { getAddress } from "../getAddres";
+import { patchAddressIntoOrder } from "./patchAddressIntoOrder";
 
 type Eatable = {
   idEatable: string;
@@ -18,12 +22,11 @@ type Eatable = {
   quantity?: number;
 };
 
-
-
 export default function () {
   const cookies = parseCookies();
   const nombreRestaurante = cookies.localName;
   const idRol = cookies.idRol;
+  const router = useRouter()
 
   const id = useParams().id;
   const [eatables, setEatables] = useState<Eatable[]>();
@@ -43,17 +46,28 @@ export default function () {
         const eatable = addedEatables[i];
 
         setTimeout(async () => {
-          try {
-            console.log(eatable.idEatable);
+
+          try {      
 
             const response = await patchOrder(resp, eatable);
           } catch (error) {
             console.error("Error al parchear el eatable:", error);
           }
-        }, i * 1000);
+
+        }, i * 5000); 
       }
     }
 
+    const clientAddress = await getAddress()
+    
+    patchAddressIntoOrder(resp, clientAddress.address)
+
+    const updateOrderStatusConst = await updateOrderStatus(resp, 'SEND')
+    
+    if(!updateOrderStatusConst){
+      toast.success("Orden enviada con exito")
+      router.push("/user/stagepedido")
+    }
 
 
   };
@@ -131,7 +145,7 @@ export default function () {
                   <div>
                     <h1>asd</h1>
                     <p>Descuento 20%</p>
-                    <p>15-20min - Envío $500</p>
+                    <p>15-20min - Envio <b>GRATIS</b></p>
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-3">
@@ -187,39 +201,46 @@ export default function () {
             </div>
           </div>
         </div>
-        <div className="md:col-span-1 ms:col-span-3">
-          <div className="flex-col items-center justify-center border border-gray-200 rounded-lg p-4 shadow-2xl">
-            <h3 className="text-center pb-2 text-2xl font-medium">Carrito</h3>
+
+        <div className="col-span-1">
+          <div className="flex-col items-center justify-center border border-gray-200 rounded-xl p-4 shadow-2xl">
+            <h3 className="text-center pb-2 text-2xl font-medium">Carrito 🛒</h3>
+
             {addedEatables.length === 0 ? (
-              <h3>El carrito se encuentra vacío</h3>
+              <h3 className="text-center">El carrito se encuentra vacío</h3>
             ) : (
               
               addedEatables.map((eatable) => (
                 
                 <div
                   key={eatable.idEatable}
-                  className="flex-col items-center justify-center p-2"
-                >
 
-                  <div className="flex items-center justify-evenly">
-                    <h3 className="text-base text-center">{eatable.quantity}</h3>
+                  className="flex items-center justify-between m-5"
+                >
+                  <div className="pr-4">
+                    <h3>{eatable.quantity}</h3>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+
                     <img src={eatable.photo} className="w-10" alt="" />
                   </div>
 
                   <div className="text-center">
                     <h1>{eatable.name}</h1>
                   </div>
-                  <div className="flex items-center justify-center pt-2 gap-3">
-                    <p className="text-lg">${eatable.price}</p>
+                  <div className="flex  justify-center gap-3">
+                    <p className="text-sm items-center">${eatable.price}</p>
                   </div>
                 </div>
               ))
             )}
 
             {addedEatables.length === 0 ? null : (
-              <div className="pt-5">
-                <h3>Envio $500</h3>
-                <h3>Total a pagar ${total + 500}</h3>
+
+              <div>
+                <h3 className="pr-2">Envio <b>GRATIS</b></h3>
+                <h3 className="pr-2">Total a pagar ${Number(total)}</h3>
+
               </div>
             )}
 
