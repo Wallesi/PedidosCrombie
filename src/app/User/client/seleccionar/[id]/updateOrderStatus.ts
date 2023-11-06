@@ -18,14 +18,11 @@ type Eatable = {
 };
 
 type typeStatus = 
-  | 'WAITING'      // Gris oscuro - Esperando
-  | 'SEND'         // Gris claro - Cliente envió el pedido
-  | 'CANCELLED'   // Rojo - Local lo rechazó
-  | 'ACCEPTED'    // Amarillo - Local lo aceptó
-  | 'COOKED'      // Verde clarito - Local ya lo cocinó
-  | 'READY'       // Verde medio - Asignado para entrega
-  | 'ONITSWAY'    // Verde oscuro - En camino
-  | 'RECEIVED';   // Fucsia - Llegó a destino
+  | 'WAITING'      
+  | 'SEND'         
+  | 'CANCELLED' 
+  | 'ACCEPTED'    
+  | 'DELIVERED';  
 
 export const updateOrderStatus = async (id: string, statusValue: typeStatus) => {
 

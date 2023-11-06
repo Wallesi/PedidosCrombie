@@ -22,11 +22,13 @@ const schemaVehicle = yup.object().shape({
 
   type crudTypes = 'CREATE' | 'UPDATE' | 'DELETE';
 
+ 
+
+export default function FormVehicle({ typeCrud }: { typeCrud: crudTypes}) {
   const cookies = parseCookies();
   const userId = cookies.userId;
   const token = cookies.token;
 
-export default function FormVehicle({ typeCrud }: { typeCrud: crudTypes}) {
   const router = useRouter()
   const [data, setData] = useState();
 
