@@ -70,6 +70,7 @@ const menuId = cookies.menuId;
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(information),
         });
@@ -87,6 +88,7 @@ const menuId = cookies.menuId;
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(information),
         });
