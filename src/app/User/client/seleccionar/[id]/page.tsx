@@ -40,17 +40,20 @@ export default function () {
   const showModal = async () => {
     setModalVisible(true);
     const resp = await handleOrderData();
-    
+
     if (addedEatables) {
       for (let i = 0; i < addedEatables.length; i++) {
         const eatable = addedEatables[i];
-  
+
         setTimeout(async () => {
+
           try {      
+
             const response = await patchOrder(resp, eatable);
           } catch (error) {
             console.error("Error al parchear el eatable:", error);
           }
+
         }, i * 5000); 
       }
     }
@@ -65,6 +68,7 @@ export default function () {
       toast.success("Orden enviada con exito")
       router.push("/user/stagepedido")
     }
+
 
   };
 
@@ -93,7 +97,7 @@ export default function () {
       updatedEatables.push(eatable);
     }
     setAddedEatables(updatedEatables);
-    
+
   };
 
   useEffect(() => {
@@ -119,11 +123,11 @@ export default function () {
       console.error("Error al obtener la dirección:", error.message);
     }
   };
-  
+
 
   return (
     <div className="container mx-auto max-w-screen-2xl pl-10 pr-10 m-28">
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         <div className="col-span-2">
           <div className="flex-column">
             <div className="border rounded-lg shadow-md">
@@ -158,57 +162,71 @@ export default function () {
                 eatables.map((eatable) => (
                   <div
                     key={eatable.idEatable}
-                    className="p-2 border rounded-lg flex justify-between items-center"
+                    className="p-2 border rounded-lg flex-col justify-between items-center"
                   >
-                    <div className="flex items-center gap-2">
-                      <img src={`${eatable.photo}`} className="w-16" alt="" />
-                      <div>
+                    <div className="flex-col items-center gap-2">
+                      <div className="md:flex flex-col items-center justify-center">
+                        <img src={`${eatable.photo}`} className="w-16" alt="" />
                         <h1>{eatable.name}</h1>
-                        <p>${eatable.price}</p>
-                        <p>{eatable.menuType}</p>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex-col items-center">
+                          <p>{eatable.menuType}</p>
+                          <p>${eatable.price}</p>
+                        </div>
+
+                        <button onClick={() => addEatable(eatable)}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-8 h-8"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
-                    <button onClick={() => addEatable(eatable)}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-8 h-8"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </button>
+
                   </div>
                 ))
               )}
             </div>
           </div>
         </div>
+
         <div className="col-span-1">
           <div className="flex-col items-center justify-center border border-gray-200 rounded-xl p-4 shadow-2xl">
             <h3 className="text-center pb-2 text-2xl font-medium">Carrito 🛒</h3>
+
             {addedEatables.length === 0 ? (
               <h3 className="text-center">El carrito se encuentra vacío</h3>
             ) : (
+              
               addedEatables.map((eatable) => (
+                
                 <div
                   key={eatable.idEatable}
+
                   className="flex items-center justify-between m-5"
                 >
                   <div className="pr-4">
                     <h3>{eatable.quantity}</h3>
                   </div>
                   <div className="flex items-center justify-between gap-3">
+
                     <img src={eatable.photo} className="w-10" alt="" />
-                    <div>
-                      <h1>{eatable.name}</h1>
-                    </div>
+                  </div>
+
+                  <div className="text-center">
+                    <h1>{eatable.name}</h1>
                   </div>
                   <div className="flex  justify-center gap-3">
                     <p className="text-sm items-center">${eatable.price}</p>
@@ -218,18 +236,27 @@ export default function () {
             )}
 
             {addedEatables.length === 0 ? null : (
+
               <div>
                 <h3 className="pr-2">Envio <b>GRATIS</b></h3>
                 <h3 className="pr-2">Total a pagar ${Number(total)}</h3>
+
               </div>
             )}
 
-            <div className="flex items-center justify-evenly mt-5 z-50">
-              <button className="btn bg-red-600">Cancelar</button>
-              <button className={`btn bg-green-300 ${addedEatables.length === 0&& "pointer-events-none opacity-30"}`} onClick={showModal}>
-                Confirmar
-              </button>
+            <div className="flex-col pt-5">
+              <div className="flex flex-col w-full">
+                <button className="btn bg-red-600 mb-2">Cancelar</button>
+                <button
+                  className={`btn bg-green-300 ${addedEatables.length === 0 && "pointer-events-none opacity-30"
+                    }`}
+                  onClick={showModal}
+                >
+                  Confirmar
+                </button>
+              </div>
             </div>
+
 
             {modalVisible && (
               <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 z-50">
