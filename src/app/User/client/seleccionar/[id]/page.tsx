@@ -246,7 +246,6 @@ export default function () {
 
             <div className="flex-col pt-5">
               <div className="flex flex-col w-full">
-                <button className="btn bg-red-600 mb-2">Cancelar</button>
                 <button
                   className={`btn bg-green-300 ${addedEatables.length === 0 && "pointer-events-none opacity-30"
                     }`}

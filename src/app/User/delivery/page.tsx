@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className="container mx-auto max-w-screen-lg pl-20 pr-20">
+    <div className="container mx-auto max-w-screen-lg pl-20 pr-20 mt-28">
 
 <h1 className="text-center text-2xl font-light pt-10">Configuracion</h1>
 
